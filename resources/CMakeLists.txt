@@ -1,1 +1,1 @@
-﻿# configure_file ("digger.png" ${CMAKE_BINARY_DIR} COPYONLY)
+﻿configure_file ("crown.png" ${CMAKE_BINARY_DIR} COPYONLY)
