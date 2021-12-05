@@ -13,11 +13,11 @@ if (MSVC)
     add_compile_options (/W4 /permissive- /Zc:externConstexpr /Zc:inline /analyze)
 endif ()
 
-add_executable (${CMAKE_PROJECT_NAME}WIN32)
+add_executable (${CMAKE_PROJECT_NAME})
 
 add_subdirectory (include)
 add_subdirectory (src)
-add_subdirectory (resources)
+add_subdirectory(resources)
 
 set (SFML_STATIC_LIBRARIES TRUE)
 set (SFML_DIR "C:/SFML/SFML-2.5.1/lib/cmake/SFML")
