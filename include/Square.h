@@ -16,9 +16,13 @@ public:
 
     void setWidth(float width);
     void setHeight(float height);
-	
-    void setOrigin(sf::Vector2f origin);
-    void setPosition(sf::Vector2f position);
+
+    float getWidth() const;
+    float getHeight() const;
+
+	//todo: test reference
+    void setOrigin(const sf::Vector2f& origin);
+    void setPosition(const sf::Vector2f& position);
     void setTexture(sf::Texture* texture);
     void removeTexture();
 	

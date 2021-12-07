@@ -8,6 +8,9 @@ MatrixItem::MatrixItem(int row, int col, float originX, float originY) :
 	m_square.setPosition({ m_col * m_square.getWidth(), m_row * m_square.getHeight() });
 }
 
+MatrixItem::~MatrixItem() = default;
+
+
 void MatrixItem::draw(sf::RenderWindow& window)
 {
 	m_square.draw(window);

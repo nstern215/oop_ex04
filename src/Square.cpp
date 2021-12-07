@@ -17,6 +17,9 @@ void Square::draw(sf::RenderWindow& window)
 	shape.setPosition(m_position);
 	shape.setFillColor(m_bgColor);
 
+	shape.setOutlineColor(sf::Color::Black);
+	shape.setOutlineThickness(1);
+	
 	window.draw(shape);
 
 	//todo: draw texture
@@ -32,12 +35,22 @@ void Square::setHeight(float height)
 	m_height = height;
 }
 
-void Square::setOrigin(sf::Vector2f origin)
+float Square::getWidth() const
+{
+	return m_width;
+}
+
+float Square::getHeight() const
+{
+	return m_height;
+}
+
+void Square::setOrigin(const sf::Vector2f& origin)
 {
 	m_origin = origin;
 }
 
-void Square::setPosition(sf::Vector2f position)
+void Square::setPosition(const sf::Vector2f& position)
 {
 	m_position = position;
 }
