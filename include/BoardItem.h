@@ -5,5 +5,8 @@
 class BoardItem : public MatrixItem
 {
 
+public:
+
+private:
 
 };

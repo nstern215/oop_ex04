@@ -1,6 +1,8 @@
 #pragma once
 
+#include <vector>
 #include "Matrix.h"
+
 
 class Board : public Matrix {
 
@@ -9,6 +11,15 @@ public:
 	~Board();
 
 	void draw(sf::RenderWindow& window);
+
+protected:
+
+	std::vector<MatrixItem> m_charactersLIst;
+
+	std::vector<MatrixItem> m_tilesLIst;
+
 private:
+
+
 
 };
