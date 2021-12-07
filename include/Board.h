@@ -1,7 +1,7 @@
 #pragma once
 
 
-class Boar : public Matrix {
+class Board : public Matrix {
 
 public:
 
