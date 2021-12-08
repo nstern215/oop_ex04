@@ -9,6 +9,34 @@ Square::Square(const float width, const float height, sf::Vector2f position,
 	m_bgColor(bgColor)
 {}
 
+Square::Square(const Square& other)
+{
+	//todo: test if work
+	*this = other;
+	
+	/*m_width = other.getWidth();
+	m_height = other.getHeight();
+	m_position = other.getPosition();
+	m_texture = other.getTexture();
+	m_bgColor = other.getBgColor();*/
+}
+
+
+Square& Square::operator=(const Square& other)
+{
+	if (this != &other)
+	{
+		m_width = other.getWidth();
+		m_height = other.getHeight();
+		m_position = other.getPosition();
+		m_texture = other.getTexture();
+		m_bgColor = other.getBgColor();
+	}
+
+	return *this;
+}
+
+
 void Square::draw(sf::RenderWindow& window)
 {
 	auto shape = sf::RectangleShape({ m_width, m_height });
@@ -52,7 +80,6 @@ sf::Vector2f Square::getPosition() const
 {
 	return m_position;
 }
-
 
 void Square::setTexture(sf::Texture* texture)
 {

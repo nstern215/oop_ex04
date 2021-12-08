@@ -11,7 +11,11 @@ public:
     Square(const float width = DEFAULT_WIDTH, const float height = DEFAULT_HEIGHT,
         sf::Vector2f position = {0,0}, sf::Texture* texture = nullptr,
         sf::Color bgColor = sf::Color::White);
-    
+
+    Square(const Square& other);
+
+    Square& operator=(const Square& other);
+	
     virtual void draw(sf::RenderWindow& window);
 
     void setWidth(float width);
@@ -25,7 +29,11 @@ public:
     sf::Vector2f getPosition() const;
 	
     void setTexture(sf::Texture* texture);
+    sf::Texture* getTexture() const;
     void removeTexture();
+
+    void setBgColor(sf::Color color);
+    sf::Color getBgColor() const;
 	
     sf::FloatRect getGlobalBound() const;
 
