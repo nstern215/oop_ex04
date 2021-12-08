@@ -2,7 +2,7 @@
 
 #include "BoardItem.h"
 
-Board::Board(const unsigned col, const unsigned row) :
+Board::Board(const unsigned row, const unsigned col) :
 	Matrix(row, col)
 {
 	for (int i = 0; i < m_row; i++)

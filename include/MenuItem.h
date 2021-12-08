@@ -5,7 +5,5 @@
 class MenuItem : public MatrixItem {
 
 public:
-
-private:
-
+	MenuItem(int col, float positionOffsetX = 0, float positionOffsetY = 0);
 };

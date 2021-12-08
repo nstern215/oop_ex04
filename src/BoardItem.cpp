@@ -1,5 +1,5 @@
 #include "BoardItem.h"
 
-BoardItem::BoardItem(int row, int col, float originX, float originY):
-	MatrixItem(row, col, originX, originY)
+BoardItem::BoardItem(int row, int col, float positionOffsetX, float positionOffsetY):
+	MatrixItem(row, col, positionOffsetX, positionOffsetY)
 {}

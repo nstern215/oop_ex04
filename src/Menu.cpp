@@ -1,8 +1,14 @@
 #include "Menu.h"
 
-Menu::Menu(const unsigned col):
+#include "MenuItem.h"
+
+Menu::Menu(const unsigned col) :
 	Matrix(1, col)
-{}
+{
+	m_items.emplace_back();
+	for (int i = 0; i < m_col; i++)
+		m_items[0].push_back(new MenuItem(i));
+}
 
 Menu::~Menu()
 {

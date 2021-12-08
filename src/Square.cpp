@@ -1,10 +1,9 @@
 #include "Square.h"
 
-Square::Square(const float width, const float height, sf::Vector2f origin, sf::Vector2f position,
+Square::Square(const float width, const float height, sf::Vector2f position,
 	sf::Texture* texture, sf::Color bgColor):
 	m_width(width),
 	m_height(height),
-	m_origin(origin),
 	m_position(position),
 	m_texture(texture),
 	m_bgColor(bgColor)
@@ -13,7 +12,6 @@ Square::Square(const float width, const float height, sf::Vector2f origin, sf::V
 void Square::draw(sf::RenderWindow& window)
 {
 	auto shape = sf::RectangleShape({ m_width, m_height });
-	shape.setOrigin(m_origin);
 	shape.setPosition(m_position);
 	shape.setFillColor(m_bgColor);
 
@@ -45,15 +43,16 @@ float Square::getHeight() const
 	return m_height;
 }
 
-void Square::setOrigin(const sf::Vector2f& origin)
-{
-	m_origin = origin;
-}
-
 void Square::setPosition(const sf::Vector2f& position)
 {
 	m_position = position;
 }
+
+sf::Vector2f Square::getPosition() const
+{
+	return m_position;
+}
+
 
 void Square::setTexture(sf::Texture* texture)
 {
@@ -65,7 +64,7 @@ void Square::removeTexture()
 	m_texture = nullptr;
 }
 
-sf::FloatRect Square::getGlobalBound()
+sf::FloatRect Square::getGlobalBound() const
 {
-	return sf::FloatRect(m_origin + m_position, { m_width, m_height });
+	return sf::FloatRect(m_position, { m_width, m_height });
 }

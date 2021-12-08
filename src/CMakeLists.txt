@@ -5,4 +5,5 @@
                                                 "MatrixItem.cpp"
                                                 "Controller.cpp"
                                                 "Board.cpp"
-                                                "BoardItem.cpp")
+                                                "BoardItem.cpp"
+                                                "MenuItem.cpp")
