@@ -9,6 +9,7 @@ MatrixItem::MatrixItem(int row, int col, float positionOffsetX, float positionOf
 	setPosition(positionOffsetX, positionOffsetY);
 }
 
+//todo: delete as MatrixItem
 MatrixItem::~MatrixItem() = default;
 
 void MatrixItem::draw(sf::RenderWindow& window)

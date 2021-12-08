@@ -95,3 +95,18 @@ sf::FloatRect Square::getGlobalBound() const
 {
 	return sf::FloatRect(m_position, { m_width, m_height });
 }
+
+sf::Color Square::getBgColor() const
+{
+	return m_bgColor;
+}
+
+void Square::setBgColor(sf::Color color)
+{
+	m_bgColor = color;
+}
+
+sf::Texture* Square::getTexture() const
+{
+	return m_texture;
+}
