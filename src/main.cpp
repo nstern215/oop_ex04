@@ -1,7 +1,13 @@
+
 #include <cstdlib>
+
+#include "Controller.h"
 
 
 int main()
 {
-    return EXIT_SUCCESS;
+	Controller controller;
+	controller.run();
+
+	return EXIT_SUCCESS;
 }

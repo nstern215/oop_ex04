@@ -5,13 +5,14 @@
 class Characters : public Board {
 
 public:
+	
+	char getPlayerName();
 
+	Location characterLocation();
 
 
 private:
 
 	int m_characterNum;
-
-
 
 };

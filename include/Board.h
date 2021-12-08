@@ -16,10 +16,8 @@ protected:
 
 	std::vector<MatrixItem> m_charactersLIst;
 
-	std::vector<MatrixItem> m_tilesLIst;
-
 private:
 
-
+	void buildCharactersList();
 
 };
