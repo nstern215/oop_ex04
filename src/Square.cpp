@@ -40,15 +40,31 @@ Square& Square::operator=(const Square& other)
 void Square::draw(sf::RenderWindow& window)
 {
 	auto shape = sf::RectangleShape({ m_width, m_height });
+	
 	shape.setPosition(m_position);
 	shape.setFillColor(m_bgColor);
 
 	shape.setOutlineColor(sf::Color::Black);
 	shape.setOutlineThickness(1);
-	
+
 	window.draw(shape);
 
 	//todo: draw texture
+
+	auto shapeT = sf::RectangleShape({ m_width, m_height });
+
+	sf::Texture texture;
+	texture.loadFromFile("crown.png");
+
+	shapeT.setPosition(m_position);
+	shapeT.setFillColor(m_bgColor);
+
+	shapeT.setOutlineColor(sf::Color::Black);
+	shapeT.setOutlineThickness(1);
+
+	shapeT.setTexture(&texture, true);
+
+	window.draw(shapeT);
 }
 
 void Square::setWidth(float width)
