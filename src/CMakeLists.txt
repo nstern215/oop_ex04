@@ -1,9 +1,9 @@
 ﻿target_sources (${CMAKE_PROJECT_NAME} PRIVATE "main.cpp"
                                                 "Matrix.cpp"
                                                 "Menu.cpp"
-                                                "BoardItem.cpp"
-                                                "MenuItem.cpp"
-                                                "Board.cpp"
+                                                "Square.cpp"
                                                 "MatrixItem.cpp"
-                                                "Characters.cpp"
-                                                "Tiles.cpp")
+                                                "Controller.cpp"
+                                                "Board.cpp"
+                                                "BoardItem.cpp"
+                                                "MenuItem.cpp")

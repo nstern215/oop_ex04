@@ -11,12 +11,15 @@ public:
 	virtual ~Matrix();
 
 	virtual void draw(sf::RenderWindow& window);
+	virtual void setPosition(const sf::Vector2f& position);
+
+	sf::FloatRect getGlobalBound();
+
+	virtual char onMouseClick(sf::Event& event, sf::Vector2f location, char command);
 
 protected:
 	std::vector<std::vector<MatrixItem*>> m_items;
 
 	unsigned int m_row;
 	unsigned int m_col;
-
-	private:
 };
