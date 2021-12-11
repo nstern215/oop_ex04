@@ -4,6 +4,12 @@
 
 #include <vector>
 
+enum ItemType
+{
+	ACTION = 0,
+	ELEMENT = 1
+};
+
 class MenuItem : public MatrixItem {
 
 public:

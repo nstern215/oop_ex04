@@ -9,7 +9,7 @@
 class Board : public Matrix {
 
 public:
-	Board(unsigned int row = DEFAULT_ROW, unsigned int col = DEFAULT_COL);
+	Board(unsigned int row = DEFAULT_ROW, unsigned int col = DEFAULT_COL, Controller* controller);
 	~Board();
 
 	void draw(sf::RenderWindow& window);

@@ -1,8 +1,9 @@
 #include "Matrix.h"
 
-Matrix::Matrix(const unsigned int row, const unsigned int col):
+Matrix::Matrix(const unsigned int row, const unsigned int col, Controller* controller):
     m_row(row),
-    m_col(col)
+    m_col(col),
+	m_controller(controller)
 {}
 
 Matrix::~Matrix() = default;

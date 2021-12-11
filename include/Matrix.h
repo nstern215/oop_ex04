@@ -6,7 +6,7 @@
 
 class Matrix {
 public:
-	Matrix(const unsigned int row = 0, const unsigned int col = 0);
+	Matrix(const unsigned int row = 0, const unsigned int col = 0, Controller* controller);
 
 	virtual ~Matrix();
 
@@ -23,5 +23,5 @@ protected:
 	unsigned int m_row;
 	unsigned int m_col;
 
-	Controller m_controller;
+	Controller* m_controller;
 };
