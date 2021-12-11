@@ -2,39 +2,13 @@
 
 #include <iostream>
 
-BoardItem::BoardItem(int row, int col, char display, float positionOffsetX, float positionOffsetY):
-	MatrixItem(row, col, display, positionOffsetX, positionOffsetY)
+BoardItem::BoardItem(int row, int col, float positionOffsetX, float positionOffsetY):
+	MatrixItem(row, col, positionOffsetX, positionOffsetY)
 {}
 
-void BoardItem::setDisplay(const char& display)
+void BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture* itemTexture, std::string itemData)
 {
-	m_display = display;
-}
-
-char BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, char command)
-{
-	if ((command == 'K')||(command == 'T')||(command == 'W')||(command == 'M')||(command == '@'))
-	{
-		if (appearence(command))
-		{
-			addItem(command);
-		}
-	}
-	else if((command == '=')||(command == '#')||(command == 'F')||(command == '!')||(command == '*'))
-	{
-		m_display = command;
-	}
-	else
-    {
-		clearItem();
-    }
-	m_display = command;
-
-	std::cout << "Board item " << m_row << ":" << m_col << " " << m_display << " clicked" << std::endl;
-
-	command = ' ';
-
-	return command;
+	std::cout << "Board item " << m_row << ":" << m_col << " " << m_itemInfo.m_info << " clicked" << std::endl;
 }
 
 void BoardItem::relocate(BoardItem character)
@@ -44,21 +18,21 @@ void BoardItem::relocate(BoardItem character)
 
 void BoardItem::clearItem()
 {
-	m_display = ' ';
+	m_itemInfo.m_info = " ";
 }
 
-void BoardItem::addItem(const char& command)
+void BoardItem::addItem(const std::string& info)
 {
-	BoardItem character(m_row, m_col, command, m_square.getPosition().x, m_square.getPosition().y);
+	BoardItem character(m_row, m_col, m_square.getPosition().x, m_square.getPosition().y);
 
 	m_characters.push_back(character);
 }
 
-bool BoardItem::appearence(const char& command)
+bool BoardItem::appearence(const std::string& info)
 {
 	for (int i = 0; i < m_characters.size(); i++)
 	{
-		if (m_characters[i].m_display == command)
+		if (m_characters[i].m_itemInfo.m_info == info)
 		{
 			relocate(m_characters[i]);
 			m_boarded = true;

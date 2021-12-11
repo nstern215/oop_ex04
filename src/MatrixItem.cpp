@@ -2,10 +2,9 @@
 
 #include <iostream>
 
-MatrixItem::MatrixItem(int row, int col, char display ,float positionOffsetX, float positionOffsetY) :
+MatrixItem::MatrixItem(int row, int col,float positionOffsetX, float positionOffsetY) :
 	m_row(row),
-	m_col(col),
-	m_display(display)
+	m_col(col)
 {
 	setPosition(positionOffsetX, positionOffsetY);
 }
@@ -35,24 +34,23 @@ sf::Vector2f MatrixItem::getPosition() const
 	return m_square.getPosition();
 }
 
+
 sf::FloatRect MatrixItem::getGlobalBound()
 {
 	return m_square.getGlobalBound();
 }
 
-char MatrixItem::getDsiplay() const
+std::string MatrixItem::getInfo() const
 {
-	return m_display;
+	return m_itemInfo.m_info;
 }
 
-void MatrixItem::setDisplay(char display)
+void MatrixItem::setInfo(std::string info)
 {
-	m_display = display;
+	m_itemInfo.m_info = info;
 }
 
-char MatrixItem::onMouseClick(sf::Event& event, sf::Vector2f location, char command)
+void MatrixItem::onMouseClick(sf::Event& event, sf::Vector2f location)
 {
-	std::cout << "item " << m_row << ":" << m_col << m_display << " clicked" << std::endl;
-
-	return command;
+	std::cout << "item " << m_row << ":" << m_col<< " clicked" << std::endl;
 }

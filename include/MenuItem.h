@@ -8,15 +8,13 @@ class MenuItem : public MatrixItem {
 
 public:
 
-	MenuItem(int col, char display = ' ', float positionOffsetX = 0, float positionOffsetY = 0);
+	MenuItem(int col, float positionOffsetX, float positionOffsetY, ItemType type, sf::Texture* itemTexture, std::string itemData);
 
-	void setDisplay();
+	void setInfo();
 
-	char onMouseClick(sf::Event& event, sf::Vector2f location, char command);
+	virtual void onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture* itemTexture, std::string itemData);
 
 
 private:
 
-	std::vector<char> m_listDisplay = { 'K','M','W','T','@','!','F','#','=','*','D','C','S' };
-	
 };

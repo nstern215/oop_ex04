@@ -20,12 +20,6 @@ Board::~Board()
 			delete item;
 }
 
-//void Board::onMouseClick(sf::Event& event, sf::Vector2f location, const char& display)
-//{
-//
-//}
-
-
 void Board::draw(sf::RenderWindow& window)
 {
 	for (auto& v : m_items)

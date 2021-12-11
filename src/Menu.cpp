@@ -6,8 +6,23 @@ Menu::Menu(const unsigned int col) :
 	Matrix(1, col)
 {
 	m_items.emplace_back();
-	for (int i = 0; i < m_col; i++)
-		m_items[0].push_back(new MenuItem(i));
+
+	std::vector elems = {"KING", "WORIER", "THIEF", "MAGICIAN", "WALL", "TELEPORT", "KEY", "GATE", "FIRE", "ORK"}
+	std::vector actions = {"ADD", "DELETE", "CLEAR", "SAVE"}
+
+	int elemsCounter = 0; 
+
+	for (auto& elem : elems)
+	{
+		m_items[0].push_back(new MenuItem(counter++, " ", 0, 0, elem, m_controller.getTexture(elem), ELEMENT);
+	}
+
+	int actionsCoounter = 0;
+
+	for (auto& action : actions)
+	{
+		m_items[0].push_back(new MenuItem(counter++, " ", 0, 0, action, m_controller.getTexture(action), ACTION);
+	}
 }
 
 Menu::~Menu()

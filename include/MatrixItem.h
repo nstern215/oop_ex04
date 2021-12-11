@@ -3,45 +3,46 @@
 #include <SFML/Graphics.hpp>
 
 #include "Square.h"
-#include "MatrixItem.h"
+#include "Controller.h"
 
-//struct Item {
-//
-//    Item();
-//
-//    Square m_square;
-//
-//    char m_display;
-//    int m_row;
-//    int m_col;
-//};
+struct ItemInfo
+{
+    ItemInfo(): m_texture(nullptr), m_info("Empty"){}
 
+    int m_type;
+    sf::Texture* m_texture;
+    std::string m_itemData;
+};
 
 class MatrixItem {
 
 public:
-    MatrixItem(int row = 0, int col = 0, char display=' ', float positionOffsetX = 0, float positionOffsetY = 0);
+    MatrixItem(int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
     virtual ~MatrixItem();
 	
     virtual void draw(sf::RenderWindow& window);
     void setPosition(const sf::Vector2f& position);
     void setPosition(float positionOffsetX, float positionOffsetY);
-    void setDisplay(char display);
+    void setInfo(std::string info);
 
-    virtual char getDsiplay() const;
+    virtual std::string getInfo() const;
 
     sf::Vector2f getPosition() const;
 	
     sf::FloatRect getGlobalBound();
+
+   /* std::string print();*/
 	
-    virtual char onMouseClick(sf::Event& event, sf::Vector2f location, char command);
+    virtual void onMouseClick(sf::Event& event, sf::Vector2f location);
 
 protected:
-    
-    /*Item m_item;*/
+
     Square m_square;
 
-    char m_display;
+    ItemInfo m_itemInfo;
+
     int m_row;
     int m_col;
+
+    Controller* m_controller;
 };

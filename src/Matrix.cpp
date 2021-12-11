@@ -31,14 +31,13 @@ sf::FloatRect Matrix::getGlobalBound()
 	return bound;
 }
 
-char Matrix::onMouseClick(sf::Event& event, sf::Vector2f location, char command)
+void Matrix::onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture* itemTexture, std::string itemData)
 {
 	for (auto& v : m_items)
 		for (auto* item : v)
 			if (item->getGlobalBound().contains(location))
 			{
-				command = item->onMouseClick(event, location,command);
-				return command;
+				item->onMouseClick(event, location);
+				return;
 			}
-	return command;
 }
