@@ -16,6 +16,8 @@ public:
     sf::Vector2f getPosition() const;
 	
     sf::FloatRect getGlobalBound();
+
+    void setTexture(sf::Texture* texture);
 	
     virtual void onMouseClick(sf::Event& event, sf::Vector2f location);
 

@@ -49,14 +49,17 @@ void Square::draw(sf::RenderWindow& window)
 
 	window.draw(shape);
 
-	auto textureRect = sf::RectangleShape({ m_width - 10, m_height - 10 });
+	if (m_texture != nullptr)
+	{
+		auto textureRect = sf::RectangleShape({ m_width - 10, m_height - 10 });
 
-	sf::Vector2f texturePosition(m_position.x + 5, m_position.y + 5);
-	textureRect.setPosition(texturePosition);
+		sf::Vector2f texturePosition(m_position.x + 5, m_position.y + 5);
+		textureRect.setPosition(texturePosition);
 
-	textureRect.setTexture(m_texture, true);
+		textureRect.setTexture(m_texture, true);
 
-	window.draw(textureRect);
+		window.draw(textureRect);
+	}
 }
 
 void Square::setWidth(float width)

@@ -44,3 +44,8 @@ void MatrixItem::onMouseClick(sf::Event& event, sf::Vector2f location)
 {
 	std::cout << "item " << m_row << ":" << m_col << " clicked" << std::endl;
 }
+
+void MatrixItem::setTexture(sf::Texture* texture)
+{
+	m_square.setTexture(texture);
+}
