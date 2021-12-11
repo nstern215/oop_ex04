@@ -2,6 +2,13 @@
 
 #include "MenuItem.h"
 
+enum Type
+{
+	ACTION = 0;
+ELEMENT = 1;
+
+};
+
 Menu::Menu(const unsigned int col) :
 	Matrix(1, col)
 {

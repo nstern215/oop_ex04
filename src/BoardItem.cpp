@@ -17,7 +17,15 @@ void BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, sf::Textur
 	{
 		if(!appearence(itemTexture, itemInfo))
 		{
-			addItem(itemData)
+			addCharacter(itemTexture, itemData)
+				setItem(itemTexture, itemData);
+		}
+	}
+	else if (itemData.m_itemData() == "TELEPORT")
+	{
+		if (m_itemInfo.m_itemData == " ")
+		{
+			setItem(itemTexture, itemData)
 		}
 	}
 	else
@@ -42,11 +50,18 @@ void BoardItem::clearItem()
 }
 
 
-void BoardItem::addItem(sf::Texture* itemTexture, const std::string& info)
+void BoardItem::addCharacter(sf::Texture* itemTexture, const std::string& info)
 {
 	BoardItem character(m_row, m_col, m_square.getPosition().x, m_square.getPosition().y,itemTexture, info);
 
 	m_characters.push_back(character);
+}
+
+void BoardItem::addTeleport(sf::Texture* itemTexture, const std::string& info)
+{
+	BoardItem teleport(m_row, m_col, m_square.getPosition().x, m_square.getPosition().y, itemTexture, info);
+
+	m_characters.push_back(teleport);
 }
 
 bool BoardItem::appearence(const std::string& info)

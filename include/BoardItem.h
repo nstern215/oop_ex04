@@ -14,13 +14,17 @@ public:
 
 	void clearItem();
 
-	void addItem(sf::Texture* itemTexture, const std::string& info);
+	void addCharacter(sf::Texture* itemTexture, const std::string& info);
+
+	void addTeleport(sf::Texture* itemTexture, const std::string& info);
 
 	bool appearence(const std::string& info);
 
 private:
 	
 	std::vector<BoardItem> m_characters;
+
+	std::vector<BoardItem> m_teleports;
 
 	bool m_boarded;
 };
