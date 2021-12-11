@@ -7,14 +7,15 @@ Menu::Menu(const unsigned int col) :
 {
 	m_items.emplace_back();
 
-	std::vector elems = {"KING", "WORIER", "THIEF", "MAGICIAN", "WALL", "TELEPORT", "KEY", "GATE", "FIRE", "ORK"}
-	std::vector actions = {"ADD", "DELETE", "CLEAR", "SAVE"}
+	std::vector elems = { "KING", "WORIER", "THIEF", "MAGICIAN", "WALL", "TELEPORT", "KEY", "GATE", "FIRE", "ORK" };
+	std::vector actions = { "ADD", "DELETE", "CLEAR", "SAVE" };
 
 	int elemsCounter = 0; 
 
 	for (auto& elem : elems)
 	{
-		m_items[0].push_back(new MenuItem(counter++, " ", 0, 0, elem, m_controller.getTexture(elem), ELEMENT);
+		m_items[0].push_back(new MenuItem(elemsCounter++, 0, 0, ELEMENT, m_controller->getTexture(elem), elem));
+		/*m_items[0].push_back(new MenuItem(elemsCounter++, " ", 0, 0, elem, m_controller.getTexture(elem));*/
 	}
 
 	int actionsCoounter = 0;
