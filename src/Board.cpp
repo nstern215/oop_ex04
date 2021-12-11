@@ -33,9 +33,9 @@ void Board::initMatrix()
 void Board::freeMemory()
 {
 	for (auto& v : m_items)
-		for (auto* item : v)
+		for (auto*& item : v)
 		{
 			delete item;
-			item = NULL;
+			item = nullptr;
 		}
 }

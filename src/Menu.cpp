@@ -16,7 +16,7 @@ Menu::~Menu()
 		for (auto*& item : v)
 		{
 			delete item;
-			item = NULL;
+			item = nullptr;
 		}
 }
 
