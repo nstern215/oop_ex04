@@ -19,10 +19,11 @@ void MenuItem::onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture
 
  switch (m_itemInfo.m_type)
  {
-	 case 0:
-
-
- default:
+ case 0:
+	 m_controller->takeAction();
+	 break;
+ case 1:
+	 m_controller->setSelectedItem(m_itemInfo);
 	 break;
  }
 }

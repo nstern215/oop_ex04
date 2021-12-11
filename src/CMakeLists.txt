@@ -6,6 +6,4 @@
                                                 "Controller.cpp"
                                                 "Board.cpp"
                                                 "BoardItem.cpp"
-                                                "MenuItem.cpp"
-                                                "ElemItem.cpp"
-                                                "ActionItem.cpp")
+                                                "MenuItem.cpp")
