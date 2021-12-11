@@ -10,7 +10,6 @@ Controller::Controller():
 	
 }
 
-
 void Controller::run()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(800, 800), "Level Editor"/*, sf::Style::Fullscreen*/);
@@ -39,11 +38,11 @@ void Controller::run()
 				{
 					if (m_board.getGlobalBound().contains(window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
 					{
-						m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }));
+						m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), (m_itemInfo.m_texture), (m_itemInfo.m_itemData));
 					}
 					else if (m_menu.getGlobalBound().contains(window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
 					{
-						m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }));
+						m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), (m_itemInfo.m_texture), (m_itemInfo.m_itemData));
 					}
 				}
 			}
@@ -51,12 +50,31 @@ void Controller::run()
 	}
 }
 
+void Controller::takeAction(const ItemInfo& item)
+{
+	if (item.m_itemData == "DELETE")
+	{
+		deleteItem();
+	}
+	else if (item.m_itemData == "ADD")
+	{
+		addItem(item);
+	}
+	else if(item.m_itemData == "SAVE")
+	{
+		saveBoard();
+	}
+	else
+	{
+		clearBoard();
+	}
+}
+
 void Controller::deleteItem(ItemInfo item)
 {
-	item.m_info = "Empty";
+	item.m_itemData = ' ';
 
 	item.m_texture = nullptr;
-
 }
 
 void Controller::clearBoard()
@@ -71,15 +89,10 @@ void Controller::clearBoard()
 
 }
 
-void Controller::setSelectedItem(ItemInfo item)
-{
-
-}
-
-sf::Texture* Controller::getTexture(std::string name)
-{
-	return nullptr;
-}
+//sf::Texture* Controller::getTexture(std::string name)
+//{
+//	return nullptr;
+//}
 
 void Controller::saveBoard()
 {
@@ -88,7 +101,8 @@ void Controller::saveBoard()
 
 void Controller::addItem(const ItemInfo& item)
 {
-	m_itemInfo.m_info = item.m_info;
+	m_itemInfo.m_itemData = item.m_itemData;
 
 	m_itemInfo.m_texture = item.m_texture;
 }
+

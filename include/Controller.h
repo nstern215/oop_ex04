@@ -12,13 +12,13 @@ public:
 	
 	Controller();
 	void run();
-	void addItem();
-	void deleteItem();
+	void takeAction(const ItemInfo& item);
+	void addItem(const ItemInfo& item);
+	void deleteItem(ItemInfo item);
 	void saveBoard();
 	void clearBoard();
-	void setSelectedItem();
 
-	sf::Texture* getTexture(std::string name);
+	/*sf::Texture* getTexture(std::string name);*/
 
 private:
 
