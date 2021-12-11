@@ -12,8 +12,13 @@ Menu::Menu(const unsigned col) :
 
 Menu::~Menu()
 {
-	//todo: check for memory leak
 	for (auto& v : m_items)
 		for (auto*& item : v)
+		{
 			delete item;
+			item = NULL;
+		}
 }
+
+void Menu::resetAndResize(int row, int col)
+{}

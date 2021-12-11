@@ -3,17 +3,16 @@
 #include "Controller.h"
 
 Controller::Controller():
-	m_menu(7),
-	m_board(5,3)
-{
-	
-}
+	m_menu(8)
+{}
 
 
 void Controller::run()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(800, 800), "Level Editor"/*, sf::Style::Fullscreen*/);
 
+	m_board.resetAndResize(12, 12);
+	
 	//m_menu = Menu(8);
 	//m_board = Board(3, 3);
 	

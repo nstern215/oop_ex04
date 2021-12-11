@@ -21,7 +21,7 @@ Square::Square(const Square& other)
 	m_bgColor = other.getBgColor();*/
 }
 
-
+//todo: check if relevane because of the texture pointer
 Square& Square::operator=(const Square& other)
 {
 	if (this != &other)
@@ -49,22 +49,14 @@ void Square::draw(sf::RenderWindow& window)
 
 	window.draw(shape);
 
-	//todo: draw texture
+	auto textureRect = sf::RectangleShape({ m_width - 10, m_height - 10 });
 
-	auto shapeT = sf::RectangleShape({ m_width, m_height });
+	sf::Vector2f texturePosition(m_position.x + 5, m_position.y + 5);
+	textureRect.setPosition(texturePosition);
 
-	sf::Texture texture;
-	texture.loadFromFile("crown.png");
+	textureRect.setTexture(m_texture, true);
 
-	shapeT.setPosition(m_position);
-	shapeT.setFillColor(m_bgColor);
-
-	shapeT.setOutlineColor(sf::Color::Black);
-	shapeT.setOutlineThickness(1);
-
-	shapeT.setTexture(&texture, true);
-
-	window.draw(shapeT);
+	window.draw(textureRect);
 }
 
 void Square::setWidth(float width)

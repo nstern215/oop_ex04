@@ -12,4 +12,8 @@ public:
 	~Board();
 
 	void draw(sf::RenderWindow& window);
+
+protected:
+	void initMatrix();
+	void freeMemory();
 };

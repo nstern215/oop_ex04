@@ -16,7 +16,12 @@ public:
 
 	virtual void onMouseClick(sf::Event& event, sf::Vector2f location);
 
+	virtual void resetAndResize(int row, int col);
+
 protected:
+	virtual void freeMemory();
+	virtual void initMatrix();
+	
 	std::vector<std::vector<MatrixItem*>> m_items;
 
 	unsigned int m_row;

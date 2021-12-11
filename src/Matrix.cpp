@@ -3,9 +3,14 @@
 Matrix::Matrix(const unsigned int row, const unsigned int col):
     m_row(row),
     m_col(col)
-{}
+{
+	initMatrix();
+}
 
-Matrix::~Matrix() = default;
+Matrix::~Matrix()
+{
+	freeMemory();
+}
 
 void Matrix::draw(sf::RenderWindow& window)
 {
@@ -40,4 +45,33 @@ void Matrix::onMouseClick(sf::Event& event, sf::Vector2f location)
 				item->onMouseClick(event, location);
 				return;
 			}
+}
+
+void Matrix::freeMemory()
+{
+	for (auto& v:m_items)
+		for(auto*& item:v)
+			delete item;
+}
+
+void Matrix::initMatrix()
+{
+	for (int i=0;i<m_row;i++)
+	{
+		m_items.emplace_back();
+		for (int j = 0; j < m_col; j++)
+			m_items[i].push_back(new MatrixItem(i,j));
+	}
+}
+
+void Matrix::resetAndResize(int row, int col)
+{
+	m_row = row;
+	m_col = col;
+
+	freeMemory();
+
+	m_items.clear();
+
+	initMatrix();
 }
