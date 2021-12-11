@@ -1,6 +1,11 @@
 #include <SFML/Graphics.hpp>
-
+#include <fstream>
+#include <filesystem>
 #include "Controller.h"
+
+#include <iostream>
+
+#define BOARD_FILE_NAME "Board.txt"
 
 Controller::Controller() :
 	m_menu(8)
@@ -22,6 +27,18 @@ Controller::Controller() :
 		m_textures.push_back(new sf::Texture());
 		m_textures[counter++]->loadFromFile(t);
 	}
+	
+	if (!std::filesystem::exists(std::filesystem::current_path().string() + "\\Board.txt"))
+	{
+		int row, col;
+		std::cout << "Please enter board size: row and cols" << std::endl;
+		std::cin >> row >> col;
+		m_board.resetAndResize(row, col);
+	}
+	else
+	{
+		//loadBoard
+	}
 }
 
 
@@ -29,7 +46,7 @@ void Controller::run()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(800, 800), "Level Editor"/*, sf::Style::Fullscreen*/);
 
-	m_board.resetAndResize(12, 12);
+	//m_board.resetAndResize(12, 12);
 
 	//m_menu = Menu(8);
 	//m_board = Board(3, 3);
