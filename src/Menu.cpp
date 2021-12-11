@@ -9,8 +9,8 @@ ELEMENT = 1;
 
 };
 
-Menu::Menu(const unsigned int col) :
-	Matrix(1, col)
+Menu::Menu(const unsigned int col, Controller* controller) :
+	Matrix(1, col, controller)
 {
 	m_items.emplace_back();
 
