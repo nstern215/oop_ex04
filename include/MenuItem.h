@@ -18,7 +18,7 @@ public:
 
 	void setInfo();
 
-	virtual void onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture* itemTexture, std::string itemData);
+	virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, sf::Texture* itemTexture = nullptr, std::string itemData = " ");
 
 
 private:

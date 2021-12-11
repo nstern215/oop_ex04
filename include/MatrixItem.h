@@ -7,8 +7,6 @@
 
 struct ItemInfo
 {
-    ItemInfo(): m_texture(nullptr), m_info("Empty"){}
-
     int m_type;
     sf::Texture* m_texture;
     std::string m_itemData;
@@ -33,7 +31,7 @@ public:
 
    /* std::string print();*/
 	
-    virtual void onMouseClick(sf::Event& event, sf::Vector2f location);
+    virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, sf::Texture* itemTexture = nullptr, std::string itemData = " ");
 
 protected:
 
@@ -43,6 +41,4 @@ protected:
 
     int m_row;
     int m_col;
-
-    Controller* m_controller;
 };

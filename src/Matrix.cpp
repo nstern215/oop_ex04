@@ -74,3 +74,14 @@ void Matrix::resetAndResize(int row, int col)
 
 	initMatrix();
 }
+
+int Matrix::getCol() const
+{
+	return m_col;
+}
+
+int Matrix::getRow() const
+{
+	return m_row;
+}
+

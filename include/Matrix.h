@@ -6,7 +6,7 @@
 
 class Matrix {
 public:
-	Matrix(const unsigned int row = 0, const unsigned int col = 0, Controller* controller);
+	Matrix(const unsigned int row = 0, const unsigned int col = 0);
 
 	virtual ~Matrix();
 
@@ -19,6 +19,9 @@ public:
 
 	virtual void resetAndResize(int row, int col);
 
+	int getRow() const;
+	int getCol() const;
+
 protected:
 	virtual void freeMemory();
 	virtual void initMatrix();
@@ -27,6 +30,4 @@ protected:
 
 	unsigned int m_row;
 	unsigned int m_col;
-
-	Controller* m_controller;
 };

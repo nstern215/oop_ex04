@@ -27,11 +27,12 @@ public:
 	void run();
 	void takeAction(const ItemInfo& item);
 	void addItem(const ItemInfo& item);
-	void deleteItem(ItemInfo item);
 	void saveBoard();
 	void clearBoard();
 
-	sf::Texture* getTexture(TextureIndex textureName);
+	sf::Texture* getTexture(std::string textureName);
+
+	void setSelectedItem(ItemInfo& item);
 
 private:
 	void loadBoardFile();
@@ -40,6 +41,9 @@ private:
 	
 	Menu m_menu;
 	Board m_board;
+
+	std::string m_selectedItemData;
+	sf::Texture* m_selectedexture;
 
 	std::vector<sf::Texture*> m_textures;
 };

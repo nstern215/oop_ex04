@@ -8,7 +8,7 @@ class BoardItem : public MatrixItem
 public:
 	BoardItem(int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0, sf::Texture* itemTexture, std::string itemData);
 
-	void onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture* itemTexture, std::string itemData);
+	void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, sf::Texture* itemTexture = nullptr, std::string itemData = " ");
 
 	void setItem(sf::Texture* itemTexture, const std::string& info);
 

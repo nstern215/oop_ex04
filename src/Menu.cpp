@@ -2,20 +2,13 @@
 
 #include "MenuItem.h"
 
-enum Type
-{
-	ACTION = 0;
-ELEMENT = 1;
-
-};
-
-Menu::Menu(const unsigned int col, Controller* controller) :
-	Matrix(1, col, controller)
+Menu::Menu(const unsigned int col):
+	Matrix(1, col)
 {
 	m_items.emplace_back();
 
-	std::vector elems = { "KING", "WORIER", "THIEF", "MAGICIAN", "WALL", "TELEPORT", "KEY", "GATE", "FIRE", "ORK" };
-	std::vector actions = { "ADD", "DELETE", "CLEAR", "SAVE" };
+	std::vector<std::string> elems = { "KING", "WORIER", "THIEF", "MAGICIAN", "WALL", "TELEPORT", "KEY", "GATE", "FIRE", "ORK" };
+	std::vector<std::string> actions = { "ADD", "DELETE", "CLEAR", "SAVE" };
 
 	int elemsCounter = 0; 
 

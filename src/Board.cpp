@@ -2,8 +2,8 @@
 
 #include "BoardItem.h"
 
-Board::Board(const unsigned row, const unsigned col, Controller* controller) :
-	Matrix(row, col, controller)
+Board::Board(const unsigned row, const unsigned col) :
+	Matrix(row, col)
 {
 	initMatrix();
 }
