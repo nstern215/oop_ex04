@@ -24,7 +24,6 @@ public:
     float getWidth() const;
     float getHeight() const;
 
-	//todo: test reference
     void setPosition(const sf::Vector2f& position);
     sf::Vector2f getPosition() const;
 	

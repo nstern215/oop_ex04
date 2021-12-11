@@ -9,19 +9,14 @@ Square::Square(const float width, const float height, sf::Vector2f position,
 	m_bgColor(bgColor)
 {}
 
-Square::Square(const Square& other)
-{
-	//todo: test if work
-	*this = other;
-	
-	/*m_width = other.getWidth();
-	m_height = other.getHeight();
-	m_position = other.getPosition();
-	m_texture = other.getTexture();
-	m_bgColor = other.getBgColor();*/
-}
+Square::Square(const Square& other):
+	m_width(other.getWidth()),
+	m_height(other.getHeight()),
+	m_position(other.getPosition()),
+	m_texture(other.getTexture()),
+	m_bgColor(other.getBgColor())
+{}
 
-//todo: check if relevane because of the texture pointer
 Square& Square::operator=(const Square& other)
 {
 	if (this != &other)

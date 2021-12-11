@@ -12,6 +12,7 @@ public:
 	~Board();
 
 	void draw(sf::RenderWindow& window);
+	void load(std::vector<std::string> content);
 
 protected:
 	void initMatrix();

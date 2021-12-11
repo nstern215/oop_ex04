@@ -20,14 +20,16 @@ enum TextureIndex
 class Controller
 {
 public:
-	//todo: load board\get dimensions for a new board
-	
 	Controller();
 	void run();
 
 	sf::Texture* getTexture(TextureIndex textureName);
 
 private:
+	void loadBoardFile();
+
+	std::vector<sf::Vector2i> m_teleports;
+	
 	Menu m_menu;
 	Board m_board;
 

@@ -88,3 +88,41 @@ sf::Texture* Controller::getTexture(TextureIndex textureName)
 {
 	return m_textures[textureName];
 }
+
+void Controller::loadBoardFile()
+{
+	std::ifstream file;
+	file.open(std::filesystem::current_path().string() + "\\Board.txt");
+
+	std::vector<std::string> board;
+	
+	while (!file.eof())
+	{
+		std::string line;
+		file >> line;
+
+		if (line.empty())
+			continue;
+
+		if (line[0] == '-')
+			break;
+
+		board.emplace_back(line);
+	}
+
+	while (!file.eof())
+	{
+		int sourceRow;
+		int sourceCol;
+		int pairRow;
+		int pairCol;
+
+		file >> sourceRow >> sourceCol >> pairRow >> pairCol;
+
+		m_teleports.emplace_back(sourceRow, sourceCol, pairRow, pairCol);
+	}
+
+	file.close();
+	
+	m_board.load(board);
+}

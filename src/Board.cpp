@@ -39,3 +39,18 @@ void Board::freeMemory()
 			item = nullptr;
 		}
 }
+
+void Board::load(std::vector<std::string> content)
+{
+	int row = content.size();
+	int col = content[0].size();
+
+	resetAndResize(row, col);
+
+	for (int i = 0; i < m_row; i++)
+		for (int j = 0; j < m_col; j++)
+		{
+			//todo: load
+		}
+}
+
