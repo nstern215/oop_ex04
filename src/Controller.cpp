@@ -1,23 +1,57 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
-
+#include <fstream>
+#include <filesystem>
 #include "Controller.h"
 
-Controller::Controller():
-	m_menu(13),
-	m_board(5,5)
+#include <iostream>
+
+#define BOARD_FILE_NAME "Board.txt"
+
+Controller::Controller() :
+	m_menu(8)
 {
+	std::vector<std::string> textureName = { "crown.png",
+											"fire.png",
+											"gate.png",
+											"ork.png",
+											"thief.png",
+											"warrior.png",
+											"teleport.png",
+											"throne.png",
+											"delete.png",
+											"open.png",
+											"save.png" };
+	int counter = 0;
+	for (auto& t : textureName)
+	{
+		m_textures.push_back(new sf::Texture());
+		m_textures[counter++]->loadFromFile(t);
+	}
 	
+	if (!std::filesystem::exists(std::filesystem::current_path().string() + "\\Board.txt"))
+	{
+		int row, col;
+		std::cout << "Please enter board size: row and cols" << std::endl;
+		std::cin >> row >> col;
+		m_board.resetAndResize(row, col);
+	}
+	else
+	{
+		//loadBoard
+	}
 }
+
 
 void Controller::run()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(800, 800), "Level Editor"/*, sf::Style::Fullscreen*/);
 
+	//m_board.resetAndResize(12, 12);
+
 	//m_menu = Menu(8);
 	//m_board = Board(3, 3);
-	
-	m_board.setPosition({ 20,70});
+
+	m_board.setPosition({ 20,70 });
 
 	while (window.isOpen())
 	{
@@ -65,7 +99,7 @@ void Controller::takeAction(const ItemInfo& item)
 		saveBoard();
 	}
 	else
-	{
+{
 		clearBoard();
 	}
 }
@@ -76,33 +110,27 @@ void Controller::deleteItem(ItemInfo item)
 
 	item.m_texture = nullptr;
 }
-
+	
 void Controller::clearBoard()
 {
 	for ()
 	{
 		for () 
-		{
+	{
 			deleteItem();
 		}
 	}
 
 }
 
-//sf::Texture* Controller::getTexture(std::string name)
-//{
-//	return nullptr;
-//}
 
-void Controller::saveBoard()
-{
 
-}
+	}
 
 void Controller::addItem(const ItemInfo& item)
-{
+	{
 	m_itemInfo.m_itemData = item.m_itemData;
 
 	m_itemInfo.m_texture = item.m_texture;
-}
+	}
 

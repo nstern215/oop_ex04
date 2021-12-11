@@ -3,7 +3,20 @@
 #include "Menu.h"
 #include "MatrixItem.h"
 
-//struct ItemInfo;
+enum TextureIndex
+{
+	CROWN = 0,
+	FIRE = 1,
+	GATE = 2,
+	ORK = 3,
+	THIEF = 4,
+	WARRIOR = 5,
+	TELEPORT = 6,
+	THRONE = 7,
+	DELETE = 8,
+	OPEN = 9,
+	SAVE = 10
+};
 
 class Controller
 {
@@ -18,12 +31,16 @@ public:
 	void saveBoard();
 	void clearBoard();
 
-	/*sf::Texture* getTexture(std::string name);*/
+	sf::Texture* getTexture(TextureIndex textureName);
 
 private:
+	void loadBoardFile();
 
+	std::vector<sf::Vector2i> m_teleports;
+	
 	Menu m_menu;
 	Board m_board;
 
-	ItemInfo m_itemInfo;
+	std::vector<sf::Texture*> m_textures;
 };
+

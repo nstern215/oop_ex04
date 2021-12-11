@@ -4,7 +4,6 @@
 
 #define DEFAULT_WIDTH 50.0
 #define DEFAULT_HEIGHT 50.0
-#define DEFAULT_DISPLAY ' '
 
 class Square
 {
@@ -25,8 +24,6 @@ public:
     float getWidth() const;
     float getHeight() const;
 
-
-	//todo: test reference
     void setPosition(const sf::Vector2f& position);
     sf::Vector2f getPosition() const;
 	
@@ -40,10 +37,8 @@ public:
     sf::FloatRect getGlobalBound() const;
 
 private:
-
     float m_width;
     float m_height;
-
     sf::Color m_bgColor;
     sf::Vector2f m_position;
     sf::Texture* m_texture;

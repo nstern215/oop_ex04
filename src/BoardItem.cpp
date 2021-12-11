@@ -69,7 +69,7 @@ bool BoardItem::appearence(const std::string& info)
 	for (int i = 0; i < m_characters.size(); i++)
 	{
 		if (m_characters[i].m_itemInfo.m_info == info)
-		{
+{
 			relocate(m_characters[i]);
 			m_boarded = true;
 			break;

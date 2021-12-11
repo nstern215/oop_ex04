@@ -2,14 +2,13 @@
 
 #include <iostream>
 
-MatrixItem::MatrixItem(int row, int col,float positionOffsetX, float positionOffsetY) :
+MatrixItem::MatrixItem(int row, int col, float positionOffsetX, float positionOffsetY) :
 	m_row(row),
 	m_col(col)
 {
 	setPosition(positionOffsetX, positionOffsetY);
 }
 
-//todo: delete as MatrixItem
 MatrixItem::~MatrixItem() = default;
 
 void MatrixItem::draw(sf::RenderWindow& window)
@@ -50,7 +49,7 @@ void MatrixItem::setInfo(std::string info)
 	m_itemInfo.m_info = info;
 }
 
-void MatrixItem::onMouseClick(sf::Event& event, sf::Vector2f location)
+void MatrixItem::setTexture(sf::Texture* texture)
 {
-	std::cout << "item " << m_row << ":" << m_col<< " clicked" << std::endl;
+	m_square.setTexture(texture);
 }

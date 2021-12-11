@@ -9,18 +9,13 @@ Square::Square(const float width, const float height, sf::Vector2f position,
 	m_bgColor(bgColor)
 {}
 
-Square::Square(const Square& other)
-{
-	//todo: test if work
-	*this = other;
-	
-	/*m_width = other.getWidth();
-	m_height = other.getHeight();
-	m_position = other.getPosition();
-	m_texture = other.getTexture();
-	m_bgColor = other.getBgColor();*/
-}
-
+Square::Square(const Square& other):
+	m_width(other.getWidth()),
+	m_height(other.getHeight()),
+	m_position(other.getPosition()),
+	m_texture(other.getTexture()),
+	m_bgColor(other.getBgColor())
+{}
 
 Square& Square::operator=(const Square& other)
 {
@@ -40,15 +35,26 @@ Square& Square::operator=(const Square& other)
 void Square::draw(sf::RenderWindow& window)
 {
 	auto shape = sf::RectangleShape({ m_width, m_height });
+	
 	shape.setPosition(m_position);
 	shape.setFillColor(m_bgColor);
 
 	shape.setOutlineColor(sf::Color::Black);
 	shape.setOutlineThickness(1);
-	
+
 	window.draw(shape);
 
-	//todo: draw texture
+	if (m_texture != nullptr)
+	{
+		auto textureRect = sf::RectangleShape({ m_width - 10, m_height - 10 });
+
+		sf::Vector2f texturePosition(m_position.x + 5, m_position.y + 5);
+		textureRect.setPosition(texturePosition);
+
+		textureRect.setTexture(m_texture, true);
+
+		window.draw(textureRect);
+	}
 }
 
 void Square::setWidth(float width)
