@@ -2,23 +2,27 @@
 
 #include <iostream>
 
-MenuItem::MenuItem(int col, char display, float positionOffsetX, float positionOffsetY):
-	MatrixItem(0, col, display, positionOffsetX, positionOffsetY)
+enum ItemType {
+	ACTION = 0,
+ELEMENT = 1
+};
+
+MenuItem::MenuItem(int col, float positionOffsetX, float positionOffsetY, ItemType type, sf::Texture* itemTexture, std::string itemData):
+	MatrixItem(0, col, positionOffsetX, positionOffsetY)
 {
-	setDisplay();
 }
 
-void MenuItem::setDisplay()
+
+void MenuItem::onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture* itemTexture, std::string itemData)
 {
-	m_display = m_listDisplay[m_col];
-}
+ std::cout << "Menu item " << m_row << ":" << m_col << " " << m_itemInfo.m_info << " clicked" << std::endl;
+
+ switch (m_itemInfo.m_type)
+ {
+	 case 0:
 
 
-char MenuItem::onMouseClick(sf::Event & event, sf::Vector2f location, char command)
-{
-std::cout << "Menu item " << m_row << ":" << m_col << " " << m_display << " clicked" << std::endl;
-
-command = m_display;
-
-return command;
+ default:
+	 break;
+ }
 }

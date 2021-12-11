@@ -1,6 +1,9 @@
 #pragma once
 #include "Board.h"
 #include "Menu.h"
+#include "MatrixItem.h"
+
+//struct ItemInfo;
 
 class Controller
 {
@@ -9,12 +12,18 @@ public:
 	
 	Controller();
 	void run();
+	void addItem();
+	void deleteItem();
+	void saveBoard();
+	void clearBoard();
+	void setSelectedItem();
 
-
+	sf::Texture* getTexture(std::string name);
 
 private:
+
 	Menu m_menu;
 	Board m_board;
 
-	char m_command;
+	ItemInfo m_itemInfo;
 };

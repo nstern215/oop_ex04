@@ -39,18 +39,56 @@ void Controller::run()
 				{
 					if (m_board.getGlobalBound().contains(window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
 					{
-						m_command = m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), m_command);
+						m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }));
 					}
 					else if (m_menu.getGlobalBound().contains(window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
 					{
-						m_command = m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), m_command);
-					}
-					if (m_command == 'S')
-					{
-						exit(EXIT_SUCCESS);
+						m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }));
 					}
 				}
 			}
 		}
 	}
+}
+
+void Controller::deleteItem(ItemInfo item)
+{
+	item.m_info = "Empty";
+
+	item.m_texture = nullptr;
+
+}
+
+void Controller::clearBoard()
+{
+	for ()
+	{
+		for () 
+		{
+			deleteItem();
+		}
+	}
+
+}
+
+void Controller::setSelectedItem(ItemInfo item)
+{
+
+}
+
+sf::Texture* Controller::getTexture(std::string name)
+{
+	return nullptr;
+}
+
+void Controller::saveBoard()
+{
+
+}
+
+void Controller::addItem(const ItemInfo& item)
+{
+	m_itemInfo.m_info = item.m_info;
+
+	m_itemInfo.m_texture = item.m_texture;
 }

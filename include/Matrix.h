@@ -15,11 +15,13 @@ public:
 
 	sf::FloatRect getGlobalBound();
 
-	virtual char onMouseClick(sf::Event& event, sf::Vector2f location, char command);
+	virtual void onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture* itemTexture, std::string itemData);
 
 protected:
 	std::vector<std::vector<MatrixItem*>> m_items;
 
 	unsigned int m_row;
 	unsigned int m_col;
+
+	Controller m_controller;
 };

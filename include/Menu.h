@@ -8,8 +8,6 @@ public:
 	Menu(const unsigned int col = 0);
 	~Menu();
 
-	/*char onMouseClick(sf::Event& event, sf::Vector2f location);*/
-
 private:
 	
 };

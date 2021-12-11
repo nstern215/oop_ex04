@@ -3,25 +3,20 @@
 #include "MatrixItem.h"
 #include <vector>
 
-class King;
-
 class BoardItem : public MatrixItem
 {
 public:
-	
-	BoardItem(int row = 0, int col = 0, char display = ' ', float positionOffsetX = 0, float positionOffsetY = 0);
-	
-	void setDisplay(const char&);
+	BoardItem(int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
 
-	char onMouseClick(sf::Event& event, sf::Vector2f location, char command);
+	void onMouseClick(sf::Event& event, sf::Vector2f location, sf::Texture* itemTexture, std::string itemData);
 
 	void relocate(BoardItem character);
 
 	void clearItem();
 
-	void addItem(const char& command);
+	void addItem(const std::string& info);
 
-	bool appearence(const char& command);
+	bool appearence(const std::string& info);
 
 private:
 	
