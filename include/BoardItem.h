@@ -6,25 +6,23 @@
 class BoardItem : public MatrixItem
 {
 public:
-	BoardItem(int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0, sf::Texture* itemTexture, std::string itemData);
+	BoardItem(ItemInfo itemInfo,int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
 
-	void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, sf::Texture* itemTexture = nullptr, std::string itemData = " ");
+	void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo);
 
-	void setItem(sf::Texture* itemTexture, const std::string& info);
+	void setItem(ItemInfo itemInfo);
 
-	void clearItem();
+	void clearItem(Controller controller);
 
-	void addCharacter(sf::Texture* itemTexture, const std::string& info);
+	void addCharacter(ItemInfo itemInfo);
 
-	void addTeleport(sf::Texture* itemTexture, const std::string& info);
+	/*void addTeleport(ItemInfo itemInfo);*/
 
-	bool appearence(const std::string& info);
+	bool appearence(ItemInfo itemInfo);
 
 private:
 	
 	std::vector<BoardItem> m_characters;
-
-	std::vector<BoardItem> m_teleports;
 
 	bool m_boarded;
 };

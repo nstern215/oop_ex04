@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "MatrixItem.h"
+//#include "Controller.h"
 
 
 class Matrix {
@@ -15,7 +16,7 @@ public:
 
 	sf::FloatRect getGlobalBound();
 
-	virtual void onMouseClick(sf::Event& event, sf::Vector2f location);
+	virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo);
 
 	virtual void resetAndResize(int row, int col);
 

@@ -10,19 +10,20 @@ Menu::Menu(const unsigned int col):
 	std::vector<std::string> elems = { "KING", "WORIER", "THIEF", "MAGICIAN", "WALL", "TELEPORT", "KEY", "GATE", "FIRE", "ORK" };
 	std::vector<std::string> actions = { "ADD", "DELETE", "CLEAR", "SAVE" };
 
-	int elemsCounter = 0; 
+	int Counter = 0; 
+
+	//int elemCounter = 0;
+
+	//int actionItem = 0;
 
 	for (auto& elem : elems)
 	{
-		m_items[0].push_back(new MenuItem(elemsCounter++, 0, 0, ELEMENT, m_controller->getTexture(elem), elem));
-		/*m_items[0].push_back(new MenuItem(elemsCounter++, " ", 0, 0, elem, m_controller.getTexture(elem));*/
+		m_items[0].push_back(new MenuItem(Counter++, 0, 0, ELEMENT, m_controller->getTexture(elem), elem));
 	}
-
-	int actionsCoounter = 0;
 
 	for (auto& action : actions)
 	{
-		m_items[0].push_back(new MenuItem(counter++, " ", 0, 0, action, m_controller.getTexture(action), ACTION);
+		m_items[0].push_back(new MenuItem(Counter++, 0, 0, ACTION, m_controller.getTexture(action), action);
 	}
 }
 

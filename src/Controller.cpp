@@ -71,13 +71,11 @@ void Controller::run()
 				{
 					if (m_board.getGlobalBound().contains(window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
 					{
-						m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }));
-						/*m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), m_selectedexture, m_selectedItemData);*/
+						m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), *this, m_mode, m_itemInfo);
 					}
 					else if (m_menu.getGlobalBound().contains(window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
 					{
-						m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }));
-						/*m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), (m_itemInfo.m_texture), (m_itemInfo.m_itemData));*/
+						m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), *this, m_mode, m_itemInfo);
 					}
 				}
 			}
@@ -89,34 +87,48 @@ void Controller::takeAction(const ItemInfo& item)
 {
 	if (item.m_itemData == "DELETE")
 	{
-		m_selectedItemData = ' ';
-		m_selectedexture = nullptr;
-	}
-	else if (item.m_itemData == "ADD")
-	{
-		m_selectedItemData = item.m_itemData;
-		m_selectedexture = item.m_texture;
+		m_mode = DELETE;
 	}
 	else if(item.m_itemData == "SAVE")
 	{
-		saveBoard();
+
 	}
 	else
-{
-		clearBoard();
+	{
+		m_board.resetAndResize(m_board.getRow(), m_board.getCol());
 	}
 }
 
-void Controller::clearBoard()
+void Controller::setSelectedItem(const ItemInfo& item)
 {
-	m_board.resetAndResize(m_board.getRow(), m_board.getCol());
+	if (m_mode == DELETE)
+	{
+		m_mode = 0;
+	}
+
+	m_itemInfo.m_itemData = item.m_itemData;
+	m_itemInfo.m_texture = item.m_texture;
 }
 
-void Controller::addItem(const ItemInfo& item)
+void Controller::addTeleport(const int& col, const int& row)
 {
-	m_selectedItemData = item.m_itemData;
+	sf::Vector2i location;
 
-	m_selectedexture = item.m_texture;
+	location.x = col;
+	location.y = row;
+
+	m_teleports.push_back(location);
+}
+
+void Controller::removeTeleport(const int& col, const int& row)
+{
+	for (int i = 0; i < m_teleports.size(); i++)
+	{
+		if ((m_teleports[i].x == col)||(m_teleports[i].y == row))
+		{
+			m_teleports.erase(m_teleports.begin() - i);
+		}
+	}
 }
 
 void Controller::loadBoardFile()

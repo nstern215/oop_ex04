@@ -24,15 +24,13 @@ public:
 	//todo: load board\get dimensions for a new board
 	
 	Controller();
+
 	void run();
 	void takeAction(const ItemInfo& item);
-	void addItem(const ItemInfo& item);
-	void saveBoard();
-	void clearBoard();
-
+	void setSelectedItem(const ItemInfo& item);
+	void addTeleport(const int& col, const int& row);
+	void removeTeleport(const int& col, const int& row);
 	sf::Texture* getTexture(std::string textureName);
-
-	void setSelectedItem(ItemInfo& item);
 
 private:
 	void loadBoardFile();
@@ -41,10 +39,9 @@ private:
 	
 	Menu m_menu;
 	Board m_board;
-
-	std::string m_selectedItemData;
-	sf::Texture* m_selectedexture;
-
+	ItemInfo m_itemInfo;
 	std::vector<sf::Texture*> m_textures;
+
+	int m_mode;
 };
 

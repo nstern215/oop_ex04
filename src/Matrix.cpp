@@ -1,9 +1,8 @@
 #include "Matrix.h"
 
-Matrix::Matrix(const unsigned int row, const unsigned int col, Controller* controller):
+Matrix::Matrix(const unsigned int row, const unsigned int col):
     m_row(row),
-    m_col(col),
-	m_controller(controller)
+    m_col(col)
 {}
 
 Matrix::~Matrix()
@@ -35,13 +34,13 @@ sf::FloatRect Matrix::getGlobalBound()
 	return bound;
 }
 
-void Matrix::onMouseClick(sf::Event& event, sf::Vector2f location)
+void Matrix::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo)
 {
 	for (auto& v : m_items)
 		for (auto* item : v)
 			if (item->getGlobalBound().contains(location))
 			{
-				item->onMouseClick(event, location);
+				item->onMouseClick(event, location, controller, mode, itemInfo);
 				return;
 			}
 }

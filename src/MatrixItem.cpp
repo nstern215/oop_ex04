@@ -39,14 +39,18 @@ sf::FloatRect MatrixItem::getGlobalBound()
 	return m_square.getGlobalBound();
 }
 
+void MatrixItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo)
+{
+}
+
 std::string MatrixItem::getInfo() const
 {
-	return m_itemInfo.m_info;
+	return m_itemInfo.m_itemData;
 }
 
 void MatrixItem::setInfo(std::string info)
 {
-	m_itemInfo.m_info = info;
+	m_itemInfo.m_itemData = info;
 }
 
 void MatrixItem::setTexture(sf::Texture* texture)

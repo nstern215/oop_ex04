@@ -2,7 +2,7 @@
 
 #include "BoardItem.h"
 
-Board::Board(const unsigned row, const unsigned col) :
+Board::Board( unsigned int row, unsigned int col) :
 	Matrix(row, col)
 {
 	initMatrix();
@@ -22,11 +22,13 @@ void Board::draw(sf::RenderWindow& window)
 
 void Board::initMatrix()
 {
+	ItemInfo itemInfo;
+
 	for (int i = 0; i < m_row; i++)
 	{
 		m_items.emplace_back();
 		for (int j = 0; j < m_col; j++)
-			m_items[i].push_back(new BoardItem(i, j));
+			m_items[i].push_back(new BoardItem(itemInfo, i, j));
 	}
 }
 
