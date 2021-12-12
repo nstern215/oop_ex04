@@ -91,6 +91,8 @@ void Controller::takeAction(const ItemInfo* item)
 	if (item->m_itemData == "DELETE")
 	{
 		m_mode = DELETE;
+		m_itemInfo->m_itemData = " ";
+		m_itemInfo->m_texture = nullptr;
 	}
 	else if(item->m_itemData == "SAVE")
 	{
@@ -134,6 +136,16 @@ void Controller::removeTeleport(const int& col, const int& row)
 	}
 }
 
+ItemInfo* Controller::getItemInfo()
+{
+	return m_itemInfo;
+}
+
+int Controller::getMode()
+{
+	return m_mode;
+}
+
 void Controller::loadBoardFile()
 {
 	std::ifstream file;
@@ -173,9 +185,7 @@ void Controller::loadBoardFile()
 	m_board.load(board);
 }
 
-sf::Texture* Controller::getTexture(std::string textureName)
+sf::Texture* Controller::getTexture(const int& texturId)
 {
-	//return m_textures[textureName];
-	//todo fix
-	return m_textures[0];
+	return m_textures[texturId];
 }

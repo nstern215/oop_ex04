@@ -41,7 +41,7 @@ void Menu::init(Controller& controller)
 	for (auto& action : actions)
 	{
 		ItemInfo* info = new ItemInfo();
-		info->m_texture = controller.getTexture(action);
+		info->m_texture = controller.getTexture(actions);
 		info->m_itemData = action;
 
 		m_items[0].push_back(new MenuItem(info, counter++, 0, 0));

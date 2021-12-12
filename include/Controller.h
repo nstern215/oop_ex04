@@ -28,7 +28,13 @@ public:
 	void setSelectedItem(const ItemInfo* item);
 	void addTeleport(const int& col, const int& row);
 	void removeTeleport(const int& col, const int& row);
-	sf::Texture* getTexture(std::string textureName);
+	Board loadBoard();
+
+
+
+	ItemInfo* getItemInfo();
+	int getMode();
+	sf::Texture* getTexture(const int& texturId);
 
 private:
 	void loadBoardFile();
