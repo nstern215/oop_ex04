@@ -35,6 +35,8 @@ void Menu::init(Controller& controller)
 	for (auto& elem : elems)
 	{
 		ItemInfo* info = new ItemInfo();
+
+		info->m_type = 1;
 		info->m_texture = controller.getTexture(elem);
 		info->m_itemData = elem;
 
@@ -47,6 +49,7 @@ void Menu::init(Controller& controller)
 	for (auto& action : actions)
 	{
 		ItemInfo* info = new ItemInfo();
+		info->m_type = 0;
 		info->m_texture = controller.getTexture(action);
 		info->m_itemData = action;
 

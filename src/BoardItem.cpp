@@ -9,8 +9,6 @@ BoardItem::BoardItem(ItemInfo* itemInfo, int row, int col, float positionOffsetX
 
 void BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller)
 {
-	std::cout << "Board item " << m_row << ":" << m_col << " " << (m_itemInfo ? m_itemInfo->m_itemData : "") << " clicked" << std::endl;
-
 	std::string data = controller.getItemInfo()->m_itemData;
 
 	if (((controller.getItemInfo()->m_itemData == "KING") ||
@@ -35,6 +33,8 @@ void BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller
 			setItem(controller.getItemInfo());
 		}
 	}
+
+	std::cout << "Board item " << m_row << ":" << m_col << " " << (m_itemInfo ? m_itemInfo->m_itemData : "") << " clicked" << std::endl;
 }
 
 void BoardItem::setItem(ItemInfo* itemInfo)
