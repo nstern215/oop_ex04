@@ -40,9 +40,12 @@ public:
 	int getMode();
 	sf::Texture* getTexture(std::string textureName);
 
+	char convertItemToChar(std::string item);
+
 private:
 	void loadBoardFile();
-
+	void save();
+	
 	std::vector<sf::Vector2i> m_teleports;
 	
 	Menu m_menu;

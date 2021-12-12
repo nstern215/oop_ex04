@@ -1,6 +1,7 @@
 #include "Board.h"
 
 #include "BoardItem.h"
+#include "Controller.h"
 
 Board::Board( unsigned int row, unsigned int col) :
 	Matrix(row, col)
@@ -58,3 +59,19 @@ void Board::load(std::vector<std::string> content)
 		}
 }
 
+std::vector<std::string> Board::save(Controller& controller)
+{
+	std::vector<std::string> lines;
+
+	for (auto& boardLine : m_items)
+	{
+		std::string line;
+		
+		for(auto*& item : boardLine)
+			line += controller.convertItemToChar(item->getInfo());
+
+		lines.push_back(line);
+	}
+	
+	return lines;
+}

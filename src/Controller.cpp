@@ -12,7 +12,7 @@ Controller::Controller()
 	m_itemInfo = new ItemInfo();
 	m_itemInfo->m_texture = nullptr;
 	m_itemInfo->m_itemData = " ";
-	
+
 	std::vector<std::string> textureName = { "crown.png",
 											"fire.png",
 											"gate.png",
@@ -27,7 +27,7 @@ Controller::Controller()
 											"add.png",
 											"wall.png",
 											"key.png",
-											"mage.png"};
+											"mage.png" };
 	int counter = 0;
 	for (auto& t : textureName)
 	{
@@ -59,14 +59,14 @@ void Controller::run()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(1200, 1000), "Level Editor");
 
-	m_board.setPosition({0,150});
+	m_board.setPosition({ 0,150 });
 
 	auto font = sf::Font();
 	font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
 	sf::Text mode(std::to_string(0), font);
 	mode.setFillColor(sf::Color::White);
 	mode.setPosition(20, 85);
-	
+
 	while (window.isOpen())
 	{
 		std::string dataString;
@@ -75,7 +75,7 @@ void Controller::run()
 		dataString += " item: ";
 		dataString += m_itemInfo->m_itemData;
 		mode.setString(dataString);
-		
+
 		window.clear();
 		m_board.draw(window);
 		window.draw(mode);
@@ -255,6 +255,69 @@ sf::Texture* Controller::getTexture(std::string textureName)
 		index = 13;
 	else if (textureName == "MAGE")
 		index = 14;
-	
+
 	return m_textures[index];
+}
+
+void Controller::save()
+{
+	std::vector<std::string> lines = m_board.save(*this);
+	if (m_teleports.size() % 2 != 0)
+	{
+		auto location = m_teleports[m_teleports.size() - 1];
+		lines[location.x][location.y] = ' ';
+	}
+
+	std::ofstream file("Board.txt", 'w');
+
+	if (file.is_open())
+	{
+		for (auto& line : lines)
+			file << line << std::endl;
+
+		file << '-' << std::endl;
+
+		int teleportsAmount = m_teleports.size();
+		if (teleportsAmount % 2 != 0)
+			teleportsAmount--;
+
+		for (int i = 0; i < teleportsAmount; i+=2)
+		{
+			file << std::to_string(m_teleports[i].x)
+				<< " "
+				<< std::to_string(m_teleports[i].y)
+				<< " "
+				<< std::to_string(m_teleports[i+1].x)
+				<< " "
+				<< std::to_string(m_teleports[i+1].y)
+				<< std::endl;
+		}
+
+		file.close();
+	}
+}
+
+char Controller::convertItemToChar(std::string item)
+{
+	if (item == "KING")
+		return 'K';
+	if (item == "FIRE")
+		return '*';
+	if (item == "GATE")
+		return '#';
+	if (item == "ORK")
+		return 'O';
+	if (item == "THIEF")
+		return 'T';
+	if (item == "WARRIOR")
+		return 'W';
+	if (item == "TELEPORT")
+		return 'X';
+	if (item == "THRONE")
+		return '@';
+	if (item == "WALL")
+		return '=';
+	if (item == "MAGE")
+		return 'M';
+	return ' ';
 }
