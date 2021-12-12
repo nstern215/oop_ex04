@@ -121,6 +121,7 @@ void Controller::takeAction(const ItemInfo* item)
 	else
 	{
 		//todo:check if need to reset!!!!!!!!
+
 		const auto bound = m_board.getGlobalBound();
 		const sf::Vector2f position(bound.left, bound.top);
 		m_board.resetAndResize(m_board.getRow(), m_board.getCol());
