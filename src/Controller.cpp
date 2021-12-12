@@ -8,7 +8,7 @@
 #define BOARD_FILE_NAME "Board.txt"
 
 Controller::Controller() :
-	m_menu(8)
+	m_itemInfo(nullptr)
 {
 	std::vector<std::string> textureName = { "crown.png",
 											"fire.png",
@@ -39,16 +39,19 @@ Controller::Controller() :
 	{
 		//loadBoard
 	}
+
+	m_menu.init(*this);
 }
+
+Controller::~Controller()
+{
+	delete m_itemInfo;
+}
+
 
 void Controller::run()
 {
-	auto window = sf::RenderWindow(sf::VideoMode(800, 800), "Level Editor"/*, sf::Style::Fullscreen*/);
-
-	//m_board.resetAndResize(12, 12);
-
-	//m_menu = Menu(8);
-	//m_board = Board(3, 3);
+	auto window = sf::RenderWindow(sf::VideoMode(800, 800), "Level Editor");
 
 	m_board.setPosition({ 20,70 });
 
@@ -71,11 +74,11 @@ void Controller::run()
 				{
 					if (m_board.getGlobalBound().contains(window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
 					{
-						m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), *this, m_mode, m_itemInfo);
+						m_board.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), *this);
 					}
 					else if (m_menu.getGlobalBound().contains(window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y })))
 					{
-						m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), *this, m_mode, m_itemInfo);
+						m_menu.onMouseClick(event, window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y }), *this);
 					}
 				}
 			}
@@ -83,13 +86,13 @@ void Controller::run()
 	}
 }
 
-void Controller::takeAction(const ItemInfo& item)
+void Controller::takeAction(const ItemInfo* item)
 {
-	if (item.m_itemData == "DELETE")
+	if (item->m_itemData == "DELETE")
 	{
 		m_mode = DELETE;
 	}
-	else if(item.m_itemData == "SAVE")
+	else if(item->m_itemData == "SAVE")
 	{
 
 	}
@@ -99,15 +102,15 @@ void Controller::takeAction(const ItemInfo& item)
 	}
 }
 
-void Controller::setSelectedItem(const ItemInfo& item)
+void Controller::setSelectedItem(const ItemInfo* item)
 {
 	if (m_mode == DELETE)
 	{
 		m_mode = 0;
 	}
 
-	m_itemInfo.m_itemData = item.m_itemData;
-	m_itemInfo.m_texture = item.m_texture;
+	m_itemInfo->m_itemData = item->m_itemData;
+	m_itemInfo->m_texture = item->m_texture;
 }
 
 void Controller::addTeleport(const int& col, const int& row)
@@ -161,7 +164,8 @@ void Controller::loadBoardFile()
 
 		file >> sourceRow >> sourceCol >> pairRow >> pairCol;
 
-		m_teleports.emplace_back(sourceRow, sourceCol, pairRow, pairCol);
+		m_teleports.emplace_back(sourceRow, sourceCol);
+		m_teleports.emplace_back(pairRow, pairCol);
 	}
 
 	file.close();

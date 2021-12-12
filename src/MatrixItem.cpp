@@ -1,15 +1,17 @@
 #include "MatrixItem.h"
 
-#include <iostream>
-
-MatrixItem::MatrixItem(ItemInfo itemInfo, int row, int col, float positionOffsetX, float positionOffsetY) :
+MatrixItem::MatrixItem(ItemInfo* itemInfo, int row, int col, float positionOffsetX, float positionOffsetY) :
 	m_row(row),
-	m_col(col)
+	m_col(col),
+	m_itemInfo(itemInfo)
 {
 	setPosition(positionOffsetX, positionOffsetY);
 }
 
-MatrixItem::~MatrixItem() = default;
+MatrixItem::~MatrixItem()
+{
+	delete m_itemInfo;
+};
 
 void MatrixItem::draw(sf::RenderWindow& window)
 {
@@ -39,18 +41,18 @@ sf::FloatRect MatrixItem::getGlobalBound()
 	return m_square.getGlobalBound();
 }
 
-void MatrixItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo)
+void MatrixItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller)
 {
 }
 
 std::string MatrixItem::getInfo() const
 {
-	return m_itemInfo.m_itemData;
+	return m_itemInfo->m_itemData;
 }
 
 void MatrixItem::setInfo(std::string info)
 {
-	m_itemInfo.m_itemData = info;
+	m_itemInfo->m_itemData = info;
 }
 
 void MatrixItem::setTexture(sf::Texture* texture)

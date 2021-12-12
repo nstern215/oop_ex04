@@ -3,12 +3,10 @@
 #include <SFML/Graphics.hpp>
 
 #include "Square.h"
-#include "Controller.h"
+class Controller;
 
 struct ItemInfo
 {
-    ItemInfo():m_texture(nullptr), m_itemData(" "){}
-
     int m_type;
     sf::Texture* m_texture;
     std::string m_itemData;
@@ -17,7 +15,7 @@ struct ItemInfo
 class MatrixItem {
 
 public:
-    MatrixItem(ItemInfo itemInfo, int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
+    MatrixItem(ItemInfo* itemInfo = nullptr, int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
     virtual ~MatrixItem();
 	
     virtual void draw(sf::RenderWindow& window);
@@ -34,12 +32,12 @@ public:
 
    /* std::string print();*/
 	
-    virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo);
+    virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller);
 
 protected:
 
     Square m_square;
-    ItemInfo m_itemInfo;
+    ItemInfo* m_itemInfo;
 
     int m_row;
     int m_col;

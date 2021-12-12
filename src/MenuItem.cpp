@@ -1,22 +1,22 @@
-#include "MenuItem.h"
-
 #include <iostream>
 
+#include "MenuItem.h"
+#include "Controller.h"
 
-MenuItem::MenuItem(ItemInfo itemInfo, int col, float positionOffsetX, float positionOffsetY, ItemInfo itemInfo) :
+MenuItem::MenuItem(ItemInfo* itemInfo, int col, float positionOffsetX, float positionOffsetY) :
 	MatrixItem(itemInfo, col, positionOffsetX, positionOffsetY)
 {
-	m_itemInfo.m_itemData = itemInfo.m_itemData;
-	m_itemInfo.m_texture = itemInfo.m_texture;
+	m_itemInfo->m_itemData = itemInfo->m_itemData;
+	m_itemInfo->m_texture = itemInfo->m_texture;
 }
 
 
-void MenuItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo)
+void MenuItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller)
 {
-	std::cout << "Menu item " << m_row << ":" << m_col << " " << m_itemInfo.m_itemData <<
+	std::cout << "Menu item " << m_row << ":" << m_col << " " << m_itemInfo->m_itemData <<
 																		" clicked" << std::endl;
 
-	switch (m_itemInfo.m_type)
+	switch (m_itemInfo->m_type)
 	{
 	case 0:
 		controller.takeAction(m_itemInfo);

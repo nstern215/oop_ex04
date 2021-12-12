@@ -2,8 +2,8 @@
 
 #include <vector>
 #include "MatrixItem.h"
-//#include "Controller.h"
 
+class Controller;
 
 class Matrix {
 public:
@@ -11,12 +11,14 @@ public:
 
 	virtual ~Matrix();
 
+	virtual void init(Controller& controller);
+	
 	virtual void draw(sf::RenderWindow& window);
 	virtual void setPosition(const sf::Vector2f& position);
 
 	sf::FloatRect getGlobalBound();
 
-	virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo);
+	virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller);
 
 	virtual void resetAndResize(int row, int col);
 

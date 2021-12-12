@@ -10,6 +10,9 @@ Matrix::~Matrix()
 	freeMemory();
 }
 
+void Matrix::init(Controller& controller)
+{}
+
 void Matrix::draw(sf::RenderWindow& window)
 {
 	for (auto& v : m_items)
@@ -34,13 +37,13 @@ sf::FloatRect Matrix::getGlobalBound()
 	return bound;
 }
 
-void Matrix::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo)
+void Matrix::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller)
 {
 	for (auto& v : m_items)
-		for (auto* item : v)
+		for (auto*& item : v)
 			if (item->getGlobalBound().contains(location))
 			{
-				item->onMouseClick(event, location, controller, mode, itemInfo);
+				item->onMouseClick(event, location, controller);
 				return;
 			}
 }
@@ -58,7 +61,7 @@ void Matrix::initMatrix()
 	{
 		m_items.emplace_back();
 		for (int j = 0; j < m_col; j++)
-			m_items[i].push_back(new MatrixItem(i,j));
+			m_items[i].push_back(new MatrixItem(nullptr, i,j));
 	}
 }
 

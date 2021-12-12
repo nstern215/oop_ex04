@@ -1,7 +1,6 @@
 #pragma once
 #include "Board.h"
 #include "Menu.h"
-#include "MatrixItem.h"
 
 enum TextureIndex
 {
@@ -21,13 +20,12 @@ enum TextureIndex
 class Controller
 {
 public:
-	//todo: load board\get dimensions for a new board
-	
 	Controller();
+	~Controller();
 
 	void run();
-	void takeAction(const ItemInfo& item);
-	void setSelectedItem(const ItemInfo& item);
+	void takeAction(const ItemInfo* item);
+	void setSelectedItem(const ItemInfo* item);
 	void addTeleport(const int& col, const int& row);
 	void removeTeleport(const int& col, const int& row);
 	sf::Texture* getTexture(std::string textureName);
@@ -39,7 +37,7 @@ private:
 	
 	Menu m_menu;
 	Board m_board;
-	ItemInfo m_itemInfo;
+	ItemInfo* m_itemInfo;
 	std::vector<sf::Texture*> m_textures;
 
 	int m_mode;

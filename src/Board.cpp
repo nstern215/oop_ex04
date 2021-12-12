@@ -22,13 +22,11 @@ void Board::draw(sf::RenderWindow& window)
 
 void Board::initMatrix()
 {
-	ItemInfo itemInfo;
-
 	for (int i = 0; i < m_row; i++)
 	{
 		m_items.emplace_back();
 		for (int j = 0; j < m_col; j++)
-			m_items[i].push_back(new BoardItem(itemInfo, i, j));
+			m_items[i].push_back(new BoardItem(nullptr, i, j));
 	}
 }
 

@@ -6,13 +6,13 @@
 class BoardItem : public MatrixItem
 {
 public:
-	BoardItem(ItemInfo itemInfo, int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
+	BoardItem(ItemInfo* itemInfo = nullptr, int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
 
-	void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo);
+	void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller);
 
 	void setItem(ItemInfo itemInfo);
 
-	void clearItem(Controller controller);
+	void clearItem(Controller& controller);
 
 	void addCharacter(ItemInfo itemInfo);
 
