@@ -55,17 +55,30 @@ Controller::~Controller()
 	delete m_itemInfo;
 }
 
-
 void Controller::run()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(1200, 1000), "Level Editor");
 
-	m_board.setPosition({0,120});
+	m_board.setPosition({0,150});
 
+	auto font = sf::Font();
+	font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
+	sf::Text mode(std::to_string(0), font);
+	mode.setFillColor(sf::Color::White);
+	mode.setPosition(20, 85);
+	
 	while (window.isOpen())
 	{
+		std::string dataString;
+		dataString += "Mode: ";
+		dataString += std::to_string(m_mode);
+		dataString += " item: ";
+		dataString += m_itemInfo->m_itemData;
+		mode.setString(dataString);
+		
 		window.clear();
 		m_board.draw(window);
+		window.draw(mode);
 		m_menu.draw(window);
 		window.display();
 
