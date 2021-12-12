@@ -22,5 +22,5 @@ private:
 	
 	std::vector<std::string> m_characters;
 
-	bool m_boarded;
+	bool m_boarded = false;
 };
