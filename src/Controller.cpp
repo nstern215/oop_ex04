@@ -116,7 +116,7 @@ void Controller::takeAction(const ItemInfo* item)
 	}
 	else if (item->m_itemData == "SAVE")
 	{
-
+		save();
 	}
 	else
 	{
@@ -212,18 +212,6 @@ void Controller::loadBoardFile()
 
 sf::Texture* Controller::getTexture(std::string textureName)
 {
-	/*CROWN = 0,
-		FIRE = 1,
-		GATE = 2,
-		ORK = 3,
-		THIEF = 4,
-		WARRIOR = 5,
-		TELEPORT = 6,
-		THRONE = 7,
-		DELETE = 8,
-		OPEN = 9,
-		SAVE = 10*/
-
 	int index = 0;
 
 	if (textureName == "KING")
@@ -320,5 +308,5 @@ char Controller::convertItemToChar(std::string item)
 		return '=';
 	if (item == "MAGE")
 		return 'M';
-	return ' ';
+	return '_';
 }
