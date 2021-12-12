@@ -3,7 +3,7 @@
 #include "MenuItem.h"
 #include "Controller.h"
 
-Menu::Menu():
+Menu::Menu() :
 	Matrix(1)
 {}
 
@@ -21,11 +21,14 @@ void Menu::resetAndResize(int row, int col)
 {}
 
 void Menu::init(Controller& controller)
-{	
+{
 	m_items.emplace_back();
 
 	std::vector<std::string> elems = { "KING", "WORIER", "THIEF", "MAGICIAN", "WALL", "TELEPORT", "KEY", "GATE", "FIRE", "ORK" };
 	std::vector<std::string> actions = { "ADD", "DELETE", "CLEAR", "SAVE" };
+
+	m_row = 1;
+	m_col = elems.size() + actions.size();
 
 	int counter = 0;
 
@@ -46,4 +49,6 @@ void Menu::init(Controller& controller)
 
 		m_items[0].push_back(new MenuItem(info, counter++, 0, 0));
 	}
+
+	setPosition({ 0,0 });
 }

@@ -24,7 +24,7 @@ public:
     float getWidth() const;
     float getHeight() const;
 
-    void setPosition(const sf::Vector2f& position);
+    void setPosition(const sf::Vector2f position);
     sf::Vector2f getPosition() const;
 	
     void setTexture(sf::Texture* texture);

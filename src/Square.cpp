@@ -78,7 +78,7 @@ float Square::getHeight() const
 	return m_height;
 }
 
-void Square::setPosition(const sf::Vector2f& position)
+void Square::setPosition(const sf::Vector2f position)
 {
 	m_position = position;
 }

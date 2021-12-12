@@ -42,11 +42,15 @@ void Board::freeMemory()
 
 void Board::load(std::vector<std::string> content)
 {
+	sf::Vector2f position = m_items[0][0]->getPosition();
+	
 	int row = content.size();
 	int col = content[0].size();
 
 	resetAndResize(row, col);
 
+	setPosition(position);
+	
 	for (int i = 0; i < m_row; i++)
 		for (int j = 0; j < m_col; j++)
 		{

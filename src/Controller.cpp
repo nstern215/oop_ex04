@@ -53,7 +53,7 @@ void Controller::run()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(800, 800), "Level Editor");
 
-	m_board.setPosition({ 20,70 });
+	m_board.setPosition({ 70,70 });
 
 	while (window.isOpen())
 	{
@@ -100,7 +100,11 @@ void Controller::takeAction(const ItemInfo* item)
 	}
 	else
 	{
+		//todo:check if need to reset!!!!!!!!
+		const auto bound = m_board.getGlobalBound();
+		const sf::Vector2f position(bound.left, bound.top);
 		m_board.resetAndResize(m_board.getRow(), m_board.getCol());
+		m_board.setPosition(position);
 	}
 }
 
