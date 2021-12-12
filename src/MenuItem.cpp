@@ -3,8 +3,8 @@
 #include <iostream>
 
 
-MenuItem::MenuItem(int col, float positionOffsetX, float positionOffsetY, ItemInfo itemInfo) :
-	MatrixItem(0, col, positionOffsetX, positionOffsetY)
+MenuItem::MenuItem(ItemInfo itemInfo, int col, float positionOffsetX, float positionOffsetY, ItemInfo itemInfo) :
+	MatrixItem(itemInfo, col, positionOffsetX, positionOffsetY)
 {
 	m_itemInfo.m_itemData = itemInfo.m_itemData;
 	m_itemInfo.m_texture = itemInfo.m_texture;

@@ -17,7 +17,7 @@ struct ItemInfo
 class MatrixItem {
 
 public:
-    MatrixItem(int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
+    MatrixItem(ItemInfo itemInfo, int row = 0, int col = 0, float positionOffsetX = 0, float positionOffsetY = 0);
     virtual ~MatrixItem();
 	
     virtual void draw(sf::RenderWindow& window);

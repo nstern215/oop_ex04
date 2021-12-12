@@ -14,7 +14,7 @@ class MenuItem : public MatrixItem {
 
 public:
 
-	MenuItem(int col, float positionOffsetX, float positionOffsetY, ItemInfo itemInfo);
+	MenuItem(ItemInfo itemInfo, int col, float positionOffsetX, float positionOffsetY, ItemInfo itemInfo);
 
 	virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo);
 

@@ -3,7 +3,7 @@
 #include <iostream>
 
 BoardItem::BoardItem(ItemInfo itemInfo, int row, int col, float positionOffsetX, float positionOffsetY):
-	MatrixItem(row, col, positionOffsetX, positionOffsetY)
+	MatrixItem(itemInfo, row, col, positionOffsetX, positionOffsetY)
 {}
 
 void BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller, const int& mode, ItemInfo itemInfo)

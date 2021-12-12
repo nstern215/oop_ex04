@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-MatrixItem::MatrixItem(int row, int col, float positionOffsetX, float positionOffsetY) :
+MatrixItem::MatrixItem(ItemInfo itemInfo, int row, int col, float positionOffsetX, float positionOffsetY) :
 	m_row(row),
 	m_col(col)
 {
