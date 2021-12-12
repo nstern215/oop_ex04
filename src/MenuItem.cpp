@@ -4,7 +4,7 @@
 #include "Controller.h"
 
 MenuItem::MenuItem(ItemInfo* itemInfo, int col, float positionOffsetX, float positionOffsetY) :
-	MatrixItem(itemInfo, col, positionOffsetX, positionOffsetY)
+	MatrixItem(itemInfo, 0, col, positionOffsetX, positionOffsetY)
 {
 	m_itemInfo->m_itemData = itemInfo->m_itemData;
 	m_itemInfo->m_texture = itemInfo->m_texture;
