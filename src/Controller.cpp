@@ -92,7 +92,7 @@ void Controller::takeAction(const ItemInfo* item)
 	{
 		m_mode = DELETE;
 	}
-	else if(item->m_itemData == "SAVE")
+	else if (item->m_itemData == "SAVE")
 	{
 
 	}
@@ -131,7 +131,7 @@ void Controller::removeTeleport(const int& col, const int& row)
 {
 	for (int i = 0; i < m_teleports.size(); i++)
 	{
-		if ((m_teleports[i].x == col)||(m_teleports[i].y == row))
+		if ((m_teleports[i].x == col) || (m_teleports[i].y == row))
 		{
 			m_teleports.erase(m_teleports.begin() - i);
 		}
@@ -179,7 +179,42 @@ void Controller::loadBoardFile()
 
 sf::Texture* Controller::getTexture(std::string textureName)
 {
-	//return m_textures[textureName];
-	//todo fix
-	return m_textures[0];
+	/*CROWN = 0,
+		FIRE = 1,
+		GATE = 2,
+		ORK = 3,
+		THIEF = 4,
+		WARRIOR = 5,
+		TELEPORT = 6,
+		THRONE = 7,
+		DELETE = 8,
+		OPEN = 9,
+		SAVE = 10*/
+
+	int index = 0;
+
+	if (textureName == "CROWN")
+		index = 0;
+	else if (textureName == "FIRE")
+		index = 1;
+	else if (textureName == "GATE")
+		index = 2;
+	else if (textureName == "ORK")
+		index = 3;
+	else if (textureName == "THIEF")
+		index = 4;
+	else if (textureName == "WARRIOR")
+		index = 5;
+	else if (textureName == "TELEPORT")
+		index = 6;
+	else if (textureName == "THRONE")
+		index = 7;
+	else if (textureName == "DELETE")
+		index = 8;
+	else if (textureName == "CLEAR")
+		index = 9;
+	else if (textureName == "SAVE")
+		index = 10;
+	
+	return m_textures[index];
 }
