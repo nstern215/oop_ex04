@@ -7,9 +7,12 @@
 
 #define BOARD_FILE_NAME "Board.txt"
 
-Controller::Controller() :
-	m_itemInfo(nullptr)
+Controller::Controller()
 {
+	m_itemInfo = new ItemInfo();
+	m_itemInfo->m_texture = nullptr;
+	m_itemInfo->m_itemData = " ";
+	
 	std::vector<std::string> textureName = { "crown.png",
 											"fire.png",
 											"gate.png",
@@ -20,7 +23,11 @@ Controller::Controller() :
 											"throne.png",
 											"delete.png",
 											"open.png",
-											"save.png" };
+											"save.png",
+											"add.png",
+											"wall.png",
+											"key.png",
+											"mage.png"};
 	int counter = 0;
 	for (auto& t : textureName)
 	{
@@ -33,7 +40,7 @@ Controller::Controller() :
 		int row, col;
 		std::cout << "Please enter board size: row and cols" << std::endl;
 		std::cin >> row >> col;
-		m_board.resetAndResize(row, col);
+		m_board.resetAndResize(std::min(row, 10), std::min(col, 10));
 	}
 	else
 	{
@@ -51,9 +58,9 @@ Controller::~Controller()
 
 void Controller::run()
 {
-	auto window = sf::RenderWindow(sf::VideoMode(800, 800), "Level Editor");
+	auto window = sf::RenderWindow(sf::VideoMode(1200, 1000), "Level Editor");
 
-	m_board.setPosition({ 70,70 });
+	m_board.setPosition({0,120});
 
 	while (window.isOpen())
 	{
@@ -91,6 +98,8 @@ void Controller::takeAction(const ItemInfo* item)
 	if (item->m_itemData == "DELETE")
 	{
 		m_mode = DELETE;
+		m_itemInfo->m_itemData = " ";
+		m_itemInfo->m_texture = nullptr;
 	}
 	else if (item->m_itemData == "SAVE")
 	{
@@ -136,6 +145,16 @@ void Controller::removeTeleport(const int& col, const int& row)
 			m_teleports.erase(m_teleports.begin() - i);
 		}
 	}
+}
+
+ItemInfo* Controller::getItemInfo()
+{
+	return m_itemInfo;
+}
+
+int Controller::getMode()
+{
+	return m_mode;
 }
 
 void Controller::loadBoardFile()
@@ -193,7 +212,7 @@ sf::Texture* Controller::getTexture(std::string textureName)
 
 	int index = 0;
 
-	if (textureName == "CROWN")
+	if (textureName == "KING")
 		index = 0;
 	else if (textureName == "FIRE")
 		index = 1;
@@ -215,6 +234,14 @@ sf::Texture* Controller::getTexture(std::string textureName)
 		index = 9;
 	else if (textureName == "SAVE")
 		index = 10;
+	else if (textureName == "ADD")
+		index = 11;
+	else if (textureName == "WALL")
+		index = 12;
+	else if (textureName == "KEY")
+		index = 13;
+	else if (textureName == "MAGE")
+		index = 14;
 	
 	return m_textures[index];
 }

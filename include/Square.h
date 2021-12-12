@@ -2,8 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
-#define DEFAULT_WIDTH 50.0
-#define DEFAULT_HEIGHT 50.0
+#define DEFAULT_WIDTH 85.0
+#define DEFAULT_HEIGHT 85.0
 
 class Square
 {

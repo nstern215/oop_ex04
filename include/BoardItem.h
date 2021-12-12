@@ -10,19 +10,17 @@ public:
 
 	void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller);
 
-	void setItem(ItemInfo itemInfo);
+	void setItem(ItemInfo* itemInfo);
 
-	void clearItem(Controller& controller);
+	void clearItem(Controller*& controller);
 
-	void addCharacter(ItemInfo itemInfo);
+	void addCharacter(ItemInfo* itemInfo);
 
-	/*void addTeleport(ItemInfo itemInfo);*/
-
-	bool appearence(ItemInfo itemInfo);
+	bool appearence(ItemInfo* itemInfo);
 
 private:
 	
-	std::vector<BoardItem> m_characters;
+	std::vector<std::string> m_characters;
 
 	bool m_boarded;
 };

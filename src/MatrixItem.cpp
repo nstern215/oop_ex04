@@ -6,6 +6,13 @@ MatrixItem::MatrixItem(ItemInfo* itemInfo, int row, int col, float positionOffse
 	m_itemInfo(itemInfo)
 {
 	setPosition(positionOffsetX, positionOffsetY);
+
+	if (!m_itemInfo)
+	{
+		m_itemInfo = new ItemInfo();
+		m_itemInfo->m_texture = nullptr;
+		m_itemInfo->m_itemData = " ";
+	}
 }
 
 MatrixItem::~MatrixItem()

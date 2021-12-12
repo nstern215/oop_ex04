@@ -14,7 +14,11 @@ enum TextureIndex
 	THRONE = 7,
 	DELETE = 8,
 	OPEN = 9,
-	SAVE = 10
+	SAVE = 10,
+	ADD = 11,
+	WALL = 12,
+	KEY = 13,
+	MAGE = 14
 };
 
 class Controller
@@ -28,6 +32,12 @@ public:
 	void setSelectedItem(const ItemInfo* item);
 	void addTeleport(const int& col, const int& row);
 	void removeTeleport(const int& col, const int& row);
+	Board loadBoard();
+
+
+
+	ItemInfo* getItemInfo();
+	int getMode();
 	sf::Texture* getTexture(std::string textureName);
 
 private:
