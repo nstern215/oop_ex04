@@ -15,7 +15,8 @@ public:
 	~Board();
 
 	void draw(sf::RenderWindow& window);
-	void load(std::vector<std::string> content);
+	void load(std::vector<std::string> content, Controller& controller);
+	void resetAndResize(int row, int col);
 
 	std::vector<std::string> save(Controller& controller);
 

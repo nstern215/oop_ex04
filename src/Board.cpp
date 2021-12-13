@@ -21,6 +21,22 @@ void Board::draw(sf::RenderWindow& window)
 			item->draw(window);
 }
 
+void Board::resetAndResize(int row, int col)
+{
+	sf::Vector2f position(0, 0);
+	
+	if (m_items[0][0])
+	{
+		auto bound = m_items[0][0]->getGlobalBound();
+		position.x = bound.left;
+		position.y = bound.top;
+	}
+
+	Matrix::resetAndResize(row, col);
+	setPosition(position);
+}
+
+
 void Board::initMatrix()
 {
 	for (int i = 0; i < m_row; i++)
@@ -41,7 +57,7 @@ void Board::freeMemory()
 		}
 }
 
-void Board::load(std::vector<std::string> content)
+void Board::load(std::vector<std::string> content, Controller& controller)
 {
 	sf::Vector2f position = m_items[0][0]->getPosition();
 	
@@ -55,7 +71,9 @@ void Board::load(std::vector<std::string> content)
 	for (int i = 0; i < m_row; i++)
 		for (int j = 0; j < m_col; j++)
 		{
-			//todo: load
+			const auto item = controller.convertChatToItem(content[i][j]);
+			m_items[i][j]->setInfo(item);
+			m_items[i][j]->setTexture(controller.getTexture(item));
 		}
 }
 

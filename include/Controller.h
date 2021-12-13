@@ -35,17 +35,19 @@ public:
 	void removeCharacter(const std::string& character);
 	bool appearence(const std::string& command);
 
-	Board loadBoard();
-
 	ItemInfo* getItemInfo();
 	int getMode();
 	sf::Texture* getTexture(std::string textureName);
 
-	char convertItemToChar(std::string item);
+	char convertItemToChar(std::string item) const;
+	std::string convertChatToItem(char c) const;
 
 private:
 	void loadBoardFile();
 	void save();
+	std::string getInfoString() const;
+	void setNewBoard();
+	void loadTextures();
 	
 	std::vector<sf::Vector2i> m_teleports;
 	std::vector<std::string> m_characters;

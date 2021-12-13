@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include <filesystem>
+#include <iostream>
 #include "Controller.h"
 
-#include <iostream>
-
 #define BOARD_FILE_NAME "Board.txt"
+#define FONT_PATH "C:/Windows/Fonts/Arial.ttf"
 
 Controller::Controller()
 {
@@ -13,38 +13,12 @@ Controller::Controller()
 	m_itemInfo->m_texture = nullptr;
 	m_itemInfo->m_itemData = " ";
 
-	std::vector<std::string> textureName = { "crown.png",
-											"fire.png",
-											"gate.png",
-											"ork.png",
-											"thief.png",
-											"warrior.png",
-											"teleport.png",
-											"throne.png",
-											"delete.png",
-											"open.png",
-											"save.png",
-											"add.png",
-											"wall.png",
-											"mage.png" };
-	int counter = 0;
-	for (auto& t : textureName)
-	{
-		m_textures.push_back(new sf::Texture());
-		m_textures[counter++]->loadFromFile(t);
-	}
+	loadTextures();
 
-	if (!std::filesystem::exists(std::filesystem::current_path().string() + "\\Board.txt"))
-	{
-		int row, col;
-		std::cout << "Please enter board size: row and cols" << std::endl;
-		std::cin >> row >> col;
-		m_board.resetAndResize(std::min(row, 10), std::min(col, 10));
-	}
+	if (!std::filesystem::exists(BOARD_FILE_NAME))
+		setNewBoard();
 	else
-	{
-		//loadBoard
-	}
+		loadBoardFile();
 
 	m_menu.init(*this);
 }
@@ -56,24 +30,19 @@ Controller::~Controller()
 
 void Controller::run()
 {
-	auto window = sf::RenderWindow(sf::VideoMode(1200, 1000), "Level Editor");
+	 auto window = sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Board Editor");
 
 	m_board.setPosition({ 0,150 });
 
 	auto font = sf::Font();
-	font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
+	font.loadFromFile(FONT_PATH);
 	sf::Text mode(std::to_string(0), font);
 	mode.setFillColor(sf::Color::White);
 	mode.setPosition(20, 85);
 
 	while (window.isOpen())
 	{
-		std::string dataString;
-		dataString += "Mode: ";
-		dataString += std::to_string(m_mode);
-		dataString += " item: ";
-		dataString += m_itemInfo->m_itemData;
-		mode.setString(dataString);
+		mode.setString(getInfoString());
 
 		window.clear();
 		m_board.draw(window);
@@ -114,26 +83,17 @@ void Controller::takeAction(const std::string& command)
 		m_itemInfo->m_texture = nullptr;
 	}
 	else if (command == "SAVE")
-	{
 		save();
-	}
-	else //create new board
-	{
-		//todo:check if need to reset!!!!!!!!
-
-		const auto bound = m_board.getGlobalBound();
-		const sf::Vector2f position(bound.left, bound.top);
-		m_board.resetAndResize(m_board.getRow(), m_board.getCol());
-		m_board.setPosition(position);
-	}
+	else 
+		setNewBoard();
 }
 
 void Controller::setSelectedItem(const ItemInfo* item)
 {
 	if (m_mode == DELETE)
-	{
 		m_mode = 0;
-	}
+	else
+		m_mode = 1;
 
 	m_itemInfo->m_itemData = item->m_itemData;
 	m_itemInfo->m_texture = item->m_texture;
@@ -157,34 +117,22 @@ void Controller::addCharacters(const std::string& character)
 void Controller::removeTeleport(const int& col, const int& row)
 {
 	for (int i = 0; i < m_teleports.size(); i++)
-	{
 		if ((m_teleports[i].x == col) || (m_teleports[i].y == row))
-		{
 			m_teleports.erase(m_teleports.begin() + i);
-		}
-	}
 }
 
 void Controller::removeCharacter(const std::string& character)
 {
 	for (int i = 0; i < m_characters.size(); i++)
-	{
 		if (m_characters[i] == character)
-		{
 			m_characters.erase(m_characters.begin() + i);
-		}
-	}
 }
 
 bool Controller::appearence(const std::string& character)
 {
 	for (int i = 0; i < m_characters.size(); i++)
-	{
 		if (m_characters[i] == character)
-		{
 			return true;
-		}
-	}
 	return false;
 }
 
@@ -200,8 +148,10 @@ int Controller::getMode()
 
 void Controller::loadBoardFile()
 {
+	m_teleports.clear();
+	
 	std::ifstream file;
-	file.open(std::filesystem::current_path().string() + "\\Board.txt");
+	file.open(BOARD_FILE_NAME);
 
 	std::vector<std::string> board;
 
@@ -218,7 +168,7 @@ void Controller::loadBoardFile()
 
 		board.emplace_back(line);
 	}
-
+	
 	while (!file.eof())
 	{
 		int sourceRow;
@@ -234,44 +184,43 @@ void Controller::loadBoardFile()
 
 	file.close();
 
-	m_board.load(board);
+	m_board.load(board, *this);
 }
 
 sf::Texture* Controller::getTexture(std::string textureName)
 {
-	int index = 0;
-
-	if (textureName == "KING")
-		index = 0;
-	else if (textureName == "FIRE")
-		index = 1;
-	else if (textureName == "GATE")
-		index = 2;
-	else if (textureName == "ORK")
-		index = 3;
-	else if (textureName == "THIEF")
-		index = 4;
-	else if (textureName == "WARRIOR")
-		index = 5;
-	else if (textureName == "TELEPORT")
-		index = 6;
-	else if (textureName == "THRONE")
-		index = 7;
-	else if (textureName == "DELETE")
-		index = 8;
-	else if (textureName == "CLEAR")
-		index = 9;
-	else if (textureName == "SAVE")
-		index = 10;
-	else if (textureName == "ADD")
-		index = 11;
-	else if (textureName == "WALL")
-		index = 12;
-	else if (textureName == "MAGE")
-		index = 13;
 	
 
-	return m_textures[index];
+	if (textureName == "KING")
+		return m_textures[0];
+	if (textureName == "FIRE")
+		return m_textures[1];
+	if (textureName == "GATE")
+		return m_textures[2];
+	if (textureName == "ORK")
+		return m_textures[3];
+	if (textureName == "THIEF")
+		return m_textures[4];
+	if (textureName == "WARRIOR")
+		return m_textures[5];
+	if (textureName == "TELEPORT")
+		return m_textures[6];
+	if (textureName == "THRONE")
+		return m_textures[7];
+	if (textureName == "DELETE")
+		return m_textures[8];
+	if (textureName == "CLEAR")
+		return m_textures[9];
+	if (textureName == "SAVE")
+		return m_textures[10];
+	if (textureName == "ADD")
+		return m_textures[11];
+	if (textureName == "WALL")
+		return m_textures[12];
+	if (textureName == "MAGE")
+		return m_textures[13];
+
+	return nullptr;
 }
 
 void Controller::save()
@@ -279,8 +228,8 @@ void Controller::save()
 	std::vector<std::string> lines = m_board.save(*this);
 	if (m_teleports.size() % 2 != 0)
 	{
-		auto location = m_teleports[m_teleports.size() - 1];
-		lines[location.x][location.y] = ' ';
+		const auto location = m_teleports[m_teleports.size() - 1];
+		lines[location.x - 1][location.y - 1] = ' ';
 	}
 	std::ofstream file("Board.txt", 'w');
 	if (file.is_open())
@@ -306,7 +255,7 @@ void Controller::save()
 	}
 }
 
-char Controller::convertItemToChar(std::string item)
+char Controller::convertItemToChar(std::string item) const
 {
 	if (item == "KING")
 		return 'K';
@@ -329,4 +278,92 @@ char Controller::convertItemToChar(std::string item)
 	if (item == "MAGE")
 		return 'M';
 	return '_';
+}
+
+std::string Controller::convertChatToItem(char c) const
+{
+	switch (c) {
+	case 'K':
+		return "KING";
+	case '*':
+		return "FIRE";
+	case '#':
+		return "GATE";
+	case 'O':
+		return "ORK";
+	case 'T':
+		return "THIEF";
+	case 'W':
+		return "WARRIOR";
+	case 'X':
+		return "TELEPORT";
+	case '@':
+		return "THRONE";
+	case '=':
+		return "WALL";
+	case 'M':
+		return "MAGE";
+	default:
+		return " ";
+	}
+}
+
+std::string Controller::getInfoString() const
+{
+	std::string dataString;
+	dataString += "Edit Mode: ";
+
+	/*if (m_mode == ) // create new board
+		dataString = "Enter new board dimensions in terminal window";
+	else*/ if (m_mode == 0)
+		dataString += "Delete";
+	else
+	{
+		dataString += "Add ";
+		dataString += m_itemInfo->m_itemData;
+	}
+	
+	return dataString;
+}
+
+void Controller::setNewBoard()
+{
+	int row;
+	int col;
+
+	std::cout << "Please enter board size: row and cols" << std::endl;
+	std::cin >> row >> col;
+
+	const auto displayMode = sf::VideoMode::getDesktopMode();
+	const int windowWidth = displayMode.width;
+	const int windowHeight = displayMode.height;
+	const int maxRow = (windowHeight - 100) / DEFAULT_WIDTH;
+	const int maxCol = (windowWidth - 40) / DEFAULT_HEIGHT;
+	
+	m_board.resetAndResize(std::min(row, maxRow), std::min(col, maxCol));
+
+}
+
+void Controller::loadTextures()
+{
+	std::vector<std::string> textureName = { "crown.png",
+											"fire.png",
+											"gate.png",
+											"ork.png",
+											"thief.png",
+											"warrior.png",
+											"teleport.png",
+											"throne.png",
+											"delete.png",
+											"open.png",
+											"save.png",
+											"add.png",
+											"wall.png",
+											"mage.png" };
+	int counter = 0;
+	for (auto& t : textureName)
+	{
+		m_textures.push_back(new sf::Texture());
+		m_textures[counter++]->loadFromFile(t);
+	}
 }
