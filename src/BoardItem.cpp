@@ -13,17 +13,14 @@ void BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller
 
 	if (m_itemInfo->m_itemData == " ")
 	{
-		if ((controller.getItemInfo()->m_itemData == "KING") ||
-			(controller.getItemInfo()->m_itemData == "THIEF") ||
-			(controller.getItemInfo()->m_itemData == "WORRIER") ||
-			(controller.getItemInfo()->m_itemData == "MAGICIAN"))
+		if ((controller.getItemInfo()->m_itemData == "KING") || (controller.getItemInfo()->m_itemData == "THIEF") ||
+			(controller.getItemInfo()->m_itemData == "WORRIER") || (controller.getItemInfo()->m_itemData == "MAGICIAN"))
 		{
-			if (!appearence(controller.getItemInfo()))
+			if (!controller.appearence(controller.getItemInfo()))
 			{
-				addCharacter(controller.getItemInfo());
+				controller.addCharacters(controller.getItemInfo()->m_itemData);
 				setItem(controller.getItemInfo());
 			}
-			m_boarded = false;
 		}
 		else if (controller.getItemInfo()->m_itemData == "TELEPORT")
 		{
@@ -51,13 +48,7 @@ void BoardItem::clearItem(Controller*& controller)
 	if ((m_itemInfo->m_itemData == "KING") || (m_itemInfo->m_itemData == "THIEF") ||
 		(m_itemInfo->m_itemData == "MAGICIAN") || (m_itemInfo->m_itemData == "WORIER"))
 	{
-		for (int i = 0; i < m_characters.size(); i++)
-		{
-			if (m_characters[i] == m_itemInfo->m_itemData)
-			{
-				m_characters.erase(m_characters.begin() - i);
-			}
-		}
+		controller->removeCharacter(controller->getItemInfo()->m_itemData);
 	}
 	else if (m_itemInfo->m_itemData == "TELEPORT")
 	{
@@ -65,24 +56,5 @@ void BoardItem::clearItem(Controller*& controller)
 	}
 	m_itemInfo->m_itemData = " ";
 	m_itemInfo->m_texture = nullptr;
-}
-
-
-void BoardItem::addCharacter(ItemInfo* itemInfo)
-{
-	m_characters.push_back(itemInfo->m_itemData);
-}
-
-bool BoardItem::appearence(ItemInfo* itemInfo)
-{
-	for (int i = 0; i < m_characters.size(); i++)
-	{
-		if (m_characters[i] == itemInfo->m_itemData)
-		{
-			m_boarded = true;
-			break;
-		}
-	}
-	return m_boarded;
 }
 

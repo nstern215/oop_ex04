@@ -14,13 +14,8 @@ public:
 
 	void clearItem(Controller*& controller);
 
-	void addCharacter(ItemInfo* itemInfo);
-
 	bool appearence(ItemInfo* itemInfo);
 
 private:
 	
-	std::vector<std::string> m_characters;
-
-	bool m_boarded = false;
 };

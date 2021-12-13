@@ -150,6 +150,11 @@ void Controller::addTeleport(const int& col, const int& row)
 	m_teleports.push_back(location);
 }
 
+void Controller::addCharacters(const std::string& character)
+{
+	m_characters.push_back(character);
+}
+
 void Controller::removeTeleport(const int& col, const int& row)
 {
 	for (int i = 0; i < m_teleports.size(); i++)
@@ -157,6 +162,17 @@ void Controller::removeTeleport(const int& col, const int& row)
 		if ((m_teleports[i].x == col) || (m_teleports[i].y == row))
 		{
 			m_teleports.erase(m_teleports.begin() - i);
+		}
+	}
+}
+
+void Controller::removeCharacter(const std::string& character)
+{
+	for (int i = 0; i < m_characters.size(); i++)
+	{
+		if (m_characters[i] == character)
+		{
+			m_characters.erase(m_characters.begin() - i);
 		}
 	}
 }
@@ -258,4 +274,16 @@ sf::Texture* Controller::getTexture(std::string textureName)
 		index = 14;
 	
 	return m_textures[index];
+}
+
+bool Controller::appearence(ItemInfo* itemInfo)
+{
+	for (int i = 0; i < m_characters.size(); i++)
+	{
+		if (m_characters[i] == itemInfo->m_itemData)
+		{
+			return true;
+		}
+	}
+	return false;
 }
