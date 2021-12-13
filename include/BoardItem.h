@@ -14,8 +14,6 @@ public:
 
 	void clearItem(Controller*& controller);
 
-	bool appearence(ItemInfo* itemInfo);
-
 private:
 	
 };

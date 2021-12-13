@@ -92,8 +92,7 @@ void Controller::setSelectedItem(const ItemInfo* item)
 {
 	if (m_mode == DELETE)
 		m_mode = 0;
-	else
-		m_mode = 1;
+
 
 	m_itemInfo->m_itemData = item->m_itemData;
 	m_itemInfo->m_texture = item->m_texture;
@@ -148,7 +147,9 @@ int Controller::getMode()
 
 void Controller::loadBoardFile()
 {
+
 	m_teleports.clear();
+	m_characters.clear();
 	
 	std::ifstream file;
 	file.open(BOARD_FILE_NAME);
@@ -166,9 +167,11 @@ void Controller::loadBoardFile()
 		if (line[0] == '-')
 			break;
 
+		getBoardInfo(line);
+
 		board.emplace_back(line);
 	}
-	
+	 
 	while (!file.eof())
 	{
 		int sourceRow;
@@ -185,6 +188,33 @@ void Controller::loadBoardFile()
 	file.close();
 
 	m_board.load(board, *this);
+}
+
+void Controller::getBoardInfo(const std::string line)
+{
+	for (int i = 0; i < line.size(); i++)
+	{
+		if (line[i] == 'K')
+		{
+			m_characters.push_back("KING");
+		}
+		else if (line[i] == '@')
+		{
+			m_characters.push_back("THRONE");
+		}
+		else if (line[i] == 'W')
+		{
+			m_characters.push_back("WARRIOR");
+		}
+		else if (line[i] == 'M')
+		{
+			m_characters.push_back("MAGE");
+		}
+		else if (line[i] == 'T')
+		{
+			m_characters.push_back("THIEF");
+		}
+	}
 }
 
 sf::Texture* Controller::getTexture(std::string textureName)
@@ -213,12 +243,10 @@ sf::Texture* Controller::getTexture(std::string textureName)
 		return m_textures[9];
 	if (textureName == "SAVE")
 		return m_textures[10];
-	if (textureName == "ADD")
-		return m_textures[11];
 	if (textureName == "WALL")
-		return m_textures[12];
+		return m_textures[11];
 	if (textureName == "MAGE")
-		return m_textures[13];
+		return m_textures[12];
 
 	return nullptr;
 }
@@ -316,10 +344,10 @@ std::string Controller::getInfoString() const
 	/*if (m_mode == ) // create new board
 		dataString = "Enter new board dimensions in terminal window";
 	else*/ if (m_mode == 0)
-		dataString += "Delete";
+		dataString += "Add";
 	else
 	{
-		dataString += "Add ";
+		dataString += "Delete";
 		dataString += m_itemInfo->m_itemData;
 	}
 	
@@ -330,6 +358,9 @@ void Controller::setNewBoard()
 {
 	int row;
 	int col;
+
+	m_teleports.clear();
+	m_characters.clear();
 
 	std::cout << "Please enter board size: row and cols" << std::endl;
 	std::cin >> row >> col;
@@ -357,7 +388,6 @@ void Controller::loadTextures()
 											"delete.png",
 											"open.png",
 											"save.png",
-											"add.png",
 											"wall.png",
 											"mage.png" };
 	int counter = 0;

@@ -44,6 +44,7 @@ public:
 
 private:
 	void loadBoardFile();
+	void getBoardInfo(const std::string line);
 	void save();
 	std::string getInfoString() const;
 	void setNewBoard();
