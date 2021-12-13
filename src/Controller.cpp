@@ -12,7 +12,7 @@ Controller::Controller()
 	m_itemInfo = new ItemInfo();
 	m_itemInfo->m_texture = nullptr;
 	m_itemInfo->m_itemData = " ";
-	
+
 	std::vector<std::string> textureName = { "crown.png",
 											"fire.png",
 											"gate.png",
@@ -27,7 +27,7 @@ Controller::Controller()
 											"add.png",
 											"wall.png",
 											"key.png",
-											"mage.png"};
+											"mage.png" };
 	int counter = 0;
 	for (auto& t : textureName)
 	{
@@ -59,14 +59,14 @@ void Controller::run()
 {
 	auto window = sf::RenderWindow(sf::VideoMode(1200, 1000), "Level Editor");
 
-	m_board.setPosition({0,150});
+	m_board.setPosition({ 0,150 });
 
 	auto font = sf::Font();
 	font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
 	sf::Text mode(std::to_string(0), font);
 	mode.setFillColor(sf::Color::White);
 	mode.setPosition(20, 85);
-	
+
 	while (window.isOpen())
 	{
 		std::string dataString;
@@ -75,7 +75,7 @@ void Controller::run()
 		dataString += " item: ";
 		dataString += m_itemInfo->m_itemData;
 		mode.setString(dataString);
-		
+
 		window.clear();
 		m_board.draw(window);
 		window.draw(mode);
@@ -116,7 +116,7 @@ void Controller::takeAction(const ItemInfo* item)
 	}
 	else if (item->m_itemData == "SAVE")
 	{
-
+		save();
 	}
 	else
 	{
@@ -228,18 +228,6 @@ void Controller::loadBoardFile()
 
 sf::Texture* Controller::getTexture(std::string textureName)
 {
-	/*CROWN = 0,
-		FIRE = 1,
-		GATE = 2,
-		ORK = 3,
-		THIEF = 4,
-		WARRIOR = 5,
-		TELEPORT = 6,
-		THRONE = 7,
-		DELETE = 8,
-		OPEN = 9,
-		SAVE = 10*/
-
 	int index = 0;
 
 	if (textureName == "KING")
@@ -272,18 +260,6 @@ sf::Texture* Controller::getTexture(std::string textureName)
 		index = 13;
 	else if (textureName == "MAGE")
 		index = 14;
-	
-	return m_textures[index];
-}
 
-bool Controller::appearence(ItemInfo* itemInfo)
-{
-	for (int i = 0; i < m_characters.size(); i++)
-	{
-		if (m_characters[i] == itemInfo->m_itemData)
-		{
-			return true;
-		}
-	}
-	return false;
+	return m_textures[index];
 }

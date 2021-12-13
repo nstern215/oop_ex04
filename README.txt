@@ -13,7 +13,7 @@ To edit an existing one, rename the file to "Board.txt" and place it in the fold
 If you want to create a new board, you will be ask to enter the size of the board in the terminal window.
 The new board will save as "Board.txt" in the same folder as the running program
 
-4.
+4. Design
 we have two main base objects:
 Matrix that represent a visual matrix and data
 Matrix item represent the data element in the matrix.
@@ -31,7 +31,7 @@ When the board cliecked it ask the controller for the selected item to add to th
 will be added to the board.
 
 
-5.
+5. Files
 Board.h\cpp
 BoardItem.h\cpp
 Controller.h\cpp
@@ -41,10 +41,30 @@ Menu.h\cpp
 MenuItem.h\cpp
 Square.h\cpp
 
-8.
+6. Data Strucutres
 Matrix use a 2D vector of MatrixItem pointer to store the data.
 We use polymorphism to store MenuItem and BoardItem in this vector
 
-7. 
+7. Algorithms
 
-8.
+8. Bugs
+
+9. Comments: Board file format
+the level represent by a txt file that contains how the board should be. for an empty cube use underscore ('_').
+after the board add a single dash ('-')
+for each teleport pair add a single row with the pair coordinates seperate by space
+row col pairRow pairCol
+
+!!include all players in the level board!!
+
+by default, the levels folder is "Resources". when the project runs from the "out\build\x64-Debug" folder,
+(created by Visual Studio after build), the game will take the Resources folder.
+Another option is a parameter: run command: ex02.exe <path>
+
+A level fomat for example:
+___==M=!__X**
+_K__=#=__T_*@
+____X____====
+W============
+-
+0 10 2 4
