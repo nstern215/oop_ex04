@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Controller.h"
 
+#include <Windows.h>
+
 #define BOARD_FILE_NAME "Board.txt"
 #define FONT_PATH "C:/Windows/Fonts/Arial.ttf"
 
@@ -192,35 +194,15 @@ void Controller::loadBoardFile()
 
 void Controller::getBoardInfo(const std::string line)
 {
+	std::string str("K@WMT");
+	
 	for (int i = 0; i < line.size(); i++)
-	{
-		if (line[i] == 'K')
-		{
-			m_characters.push_back("KING");
-		}
-		else if (line[i] == '@')
-		{
-			m_characters.push_back("THRONE");
-		}
-		else if (line[i] == 'W')
-		{
-			m_characters.push_back("WARRIOR");
-		}
-		else if (line[i] == 'M')
-		{
-			m_characters.push_back("MAGE");
-		}
-		else if (line[i] == 'T')
-		{
-			m_characters.push_back("THIEF");
-		}
-	}
+		if (str.find(line[i]) != std::string::npos)
+			m_characters.emplace_back(convertChatToItem(line[i]));
 }
 
 sf::Texture* Controller::getTexture(std::string textureName)
 {
-	
-
 	if (textureName == "KING")
 		return m_textures[0];
 	if (textureName == "FIRE")
@@ -341,14 +323,18 @@ std::string Controller::getInfoString() const
 	std::string dataString;
 	dataString += "Edit Mode: ";
 
-	/*if (m_mode == ) // create new board
-		dataString = "Enter new board dimensions in terminal window";
-	else*/ if (m_mode == 0)
-		dataString += "Add";
+	if (m_mode == 0)
+	{
+		dataString += "Add ";
+		std::string item = m_itemInfo->m_itemData;
+		for (int i = 1; i < item.size(); i++)
+			item[i] = tolower(item[i]);
+		
+		dataString += item;
+	}
 	else
 	{
 		dataString += "Delete";
-		dataString += m_itemInfo->m_itemData;
 	}
 	
 	return dataString;
@@ -356,6 +342,8 @@ std::string Controller::getInfoString() const
 
 void Controller::setNewBoard()
 {
+	MessageBox(NULL, "Please enter board dimensions in the terminal window", "New Board", MB_OK);
+	
 	int row;
 	int col;
 

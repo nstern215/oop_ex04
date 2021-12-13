@@ -29,8 +29,6 @@ public:
     sf::Vector2f getPosition() const;
 	
     sf::FloatRect getGlobalBound();
-
-   /* std::string print();*/
 	
     virtual void onMouseClick(sf::Event& event, sf::Vector2f location, Controller& controller);
 
