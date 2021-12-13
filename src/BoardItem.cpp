@@ -28,12 +28,12 @@ void BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller
 
 		if ((data == "TELEPORT") || (data == " "))
 		{
-			if (data == " ")
+			if ((data == " ")&&(controller.getMode() != 0))
 			{
 				controller.removeTeleport(m_col, m_row);
 				setItem(controller.getItemInfo());
 			}
-			else if((m_itemInfo->m_itemData == " ") || (controller.getMode() != 0))
+			else if((m_itemInfo->m_itemData == " ") && (controller.getMode() == 0))
 			{
 				controller.addTeleport(m_col, m_row);
 				setItem(controller.getItemInfo());
