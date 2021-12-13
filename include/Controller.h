@@ -17,8 +17,7 @@ enum TextureIndex
 	SAVE = 10,
 	ADD = 11,
 	WALL = 12,
-	KEY = 13,
-	MAGE = 14
+	MAGE = 13
 };
 
 class Controller
@@ -28,15 +27,15 @@ public:
 	~Controller();
 
 	void run();
-	void takeAction(const ItemInfo* item);
+	void takeAction(const std::string& command);
 	void setSelectedItem(const ItemInfo* item);
 	void addTeleport(const int& col, const int& row);
 	void addCharacters(const std::string& character);
 	void removeTeleport(const int& col, const int& row);
 	void removeCharacter(const std::string& character);
-	Board loadBoard();
+	bool appearence(const std::string& command);
 
-	bool appearence(ItemInfo* itemInfo);
+	Board loadBoard();
 
 	ItemInfo* getItemInfo();
 	int getMode();
@@ -56,7 +55,6 @@ private:
 	ItemInfo* m_itemInfo;
 	std::vector<sf::Texture*> m_textures;
 
-	int m_mode;
-	bool m_boarded;
+	int m_mode = 0;
 };
 

@@ -11,26 +11,42 @@ void BoardItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller
 {
 	std::string data = controller.getItemInfo()->m_itemData;
 
-	if (m_itemInfo->m_itemData == " ")
-	{
-		if ((controller.getItemInfo()->m_itemData == "KING") || (controller.getItemInfo()->m_itemData == "THIEF") ||
-			(controller.getItemInfo()->m_itemData == "WORRIER") || (controller.getItemInfo()->m_itemData == "MAGICIAN"))
+		if ((data == "KING") || (data == "THIEF") || (data == "WARRIOR") ||
+			(data == "MAGE") || (data == "THRONE")|| (data == " "))
 		{
-			if (!controller.appearence(controller.getItemInfo()))
+				if ((!controller.appearence(data)) && (controller.getMode() == 0) && (m_itemInfo->m_itemData == " "))
+				{
+					controller.addCharacters(controller.getItemInfo()->m_itemData);
+					setItem(controller.getItemInfo());
+				}
+				else if ((controller.appearence(m_itemInfo->m_itemData)) && (controller.getMode() != 0) && (m_itemInfo->m_itemData != " "))
+				{
+					controller.removeCharacter(m_itemInfo->m_itemData);
+					setItem(controller.getItemInfo());
+				}
+		}
+
+		if ((data == "TELEPORT") || (data == " "))
+		{
+			if (data == " ")
 			{
-				controller.addCharacters(controller.getItemInfo()->m_itemData);
+				controller.removeTeleport(m_col, m_row);
+				setItem(controller.getItemInfo());
+			}
+			else if((m_itemInfo->m_itemData == " ") || (controller.getMode() != 0))
+			{
+				controller.addTeleport(m_col, m_row);
 				setItem(controller.getItemInfo());
 			}
 		}
-		else if (controller.getItemInfo()->m_itemData == "TELEPORT")
+
+		if((data == "ORK") || (data == "WALL") || (data == "FIRE") || (data == "KEY") || (data == "GATE") || (data == " "))
 		{
-			controller.addTeleport(m_col, m_row);
-		}
-		else
-		{
+			if ((m_itemInfo->m_itemData == " ") || (controller.getMode() != 0))
+			{
 				setItem(controller.getItemInfo());
+			}
 		}
-	}
 
 	std::cout << "Board item " << m_row << ":" << m_col << " " << (m_itemInfo ? m_itemInfo->m_itemData : "") << " clicked" << std::endl;
 

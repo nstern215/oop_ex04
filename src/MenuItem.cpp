@@ -16,10 +16,12 @@ void MenuItem::onMouseClick(sf::Event& event, sf::Vector2f location, Controller&
 	std::cout << "Menu item " << m_row << ":" << m_col << " " << m_itemInfo->m_itemData <<
 																		" clicked" << std::endl;
 
+	std::string command = m_itemInfo->m_itemData;
+
 	switch (m_itemInfo->m_type)
 	{
 	case 0:
-		controller.takeAction(m_itemInfo);
+		controller.takeAction(command);
 		break;
 	case 1:
 		controller.setSelectedItem(m_itemInfo);

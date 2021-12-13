@@ -26,7 +26,6 @@ Controller::Controller()
 											"save.png",
 											"add.png",
 											"wall.png",
-											"key.png",
 											"mage.png" };
 	int counter = 0;
 	for (auto& t : textureName)
@@ -106,19 +105,19 @@ void Controller::run()
 	}
 }
 
-void Controller::takeAction(const ItemInfo* item)
+void Controller::takeAction(const std::string& command)
 {
-	if (item->m_itemData == "DELETE")
+	if (command == "DELETE")
 	{
 		m_mode = DELETE;
 		m_itemInfo->m_itemData = " ";
 		m_itemInfo->m_texture = nullptr;
 	}
-	else if (item->m_itemData == "SAVE")
+	else if (command == "SAVE")
 	{
 		save();
 	}
-	else
+	else //create new board
 	{
 		//todo:check if need to reset!!!!!!!!
 
@@ -161,7 +160,7 @@ void Controller::removeTeleport(const int& col, const int& row)
 	{
 		if ((m_teleports[i].x == col) || (m_teleports[i].y == row))
 		{
-			m_teleports.erase(m_teleports.begin() - i);
+			m_teleports.erase(m_teleports.begin() + i);
 		}
 	}
 }
@@ -172,9 +171,21 @@ void Controller::removeCharacter(const std::string& character)
 	{
 		if (m_characters[i] == character)
 		{
-			m_characters.erase(m_characters.begin() - i);
+			m_characters.erase(m_characters.begin() + i);
 		}
 	}
+}
+
+bool Controller::appearence(const std::string& character)
+{
+	for (int i = 0; i < m_characters.size(); i++)
+	{
+		if (m_characters[i] == character)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 ItemInfo* Controller::getItemInfo()
@@ -256,10 +267,66 @@ sf::Texture* Controller::getTexture(std::string textureName)
 		index = 11;
 	else if (textureName == "WALL")
 		index = 12;
-	else if (textureName == "KEY")
-		index = 13;
 	else if (textureName == "MAGE")
-		index = 14;
+		index = 13;
+	
 
 	return m_textures[index];
+}
+
+void Controller::save()
+{
+	std::vector<std::string> lines = m_board.save(*this);
+	if (m_teleports.size() % 2 != 0)
+	{
+		auto location = m_teleports[m_teleports.size() - 1];
+		lines[location.x][location.y] = ' ';
+	}
+	std::ofstream file("Board.txt", 'w');
+	if (file.is_open())
+	{
+		for (auto& line : lines)
+			file << line << std::endl;
+		file << '-' << std::endl;
+		int teleportsAmount = m_teleports.size();
+		if (teleportsAmount % 2 != 0)
+			teleportsAmount--;
+		for (int i = 0; i < teleportsAmount - 1; i += 2)
+		{
+			file << std::to_string(m_teleports[i].x)
+				<< " "
+				<< std::to_string(m_teleports[i].y)
+				<< " "
+				<< std::to_string(m_teleports[i + 1].x)
+				<< " "
+				<< std::to_string(m_teleports[i + 1].y)
+				<< std::endl;
+		}
+		file.close();
+	}
+}
+
+char Controller::convertItemToChar(std::string item)
+{
+	if (item == "KING")
+		return 'K';
+	if (item == "FIRE")
+		return '*';
+	if (item == "GATE")
+		return '#';
+	if (item == "ORK")
+		return 'O';
+	if (item == "THIEF")
+		return 'T';
+	if (item == "WARRIOR")
+		return 'W';
+	if (item == "TELEPORT")
+		return 'X';
+	if (item == "THRONE")
+		return '@';
+	if (item == "WALL")
+		return '=';
+	if (item == "MAGE")
+		return 'M';
+	return '_';
 }

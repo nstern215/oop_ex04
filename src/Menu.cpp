@@ -24,7 +24,7 @@ void Menu::init(Controller& controller)
 {
 	m_items.emplace_back();
 
-	std::vector<std::string> elems = { "KING", "WARRIOR", "THIEF", "MAGE", "WALL", "TELEPORT", "KEY", "GATE", "FIRE", "ORK" };
+	std::vector<std::string> elems = { "KING", "WARRIOR", "THIEF", "MAGE", "WALL", "THRONE", "TELEPORT", "GATE", "FIRE", "ORK" };
 	std::vector<std::string> actions = { "ADD", "DELETE", "CLEAR", "SAVE" };
 
 	m_row = 1;

@@ -33,7 +33,7 @@ void MatrixItem::setPosition(const sf::Vector2f& position)
 void MatrixItem::setPosition(float positionOffsetX, float positionOffsetY)
 {
 	m_square.setPosition({ m_col * m_square.getWidth() + positionOffsetX,
-		m_row * m_square.getHeight() + positionOffsetY });
+						  m_row * m_square.getHeight() + positionOffsetY });
 }
 
 
